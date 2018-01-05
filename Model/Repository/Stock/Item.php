@@ -22,7 +22,10 @@ use Smile\RetailerOfferInventory\Model\Repository\Management as RepositoryManage
 
 /**
  * Class Item
- * @package Smile\RetailerOfferInventory\Model\Repository\Stock
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class Item implements StockItemRepositoryInterface
 {

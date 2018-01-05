@@ -19,6 +19,13 @@ use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Framework\Model\AbstractModel;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
+/**
+ * Class Item
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class Item extends AbstractDb
 {
     /**

@@ -15,6 +15,13 @@ use Magento\Framework\EntityManager\Operation\ExtensionInterface;
 use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResource;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
+/**
+ * Class DataSaveHandler
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class DataSaveHandler implements ExtensionInterface
 {
     /**
@@ -34,6 +41,7 @@ class DataSaveHandler implements ExtensionInterface
      * @param array  $arguments
      *
      * @return object|bool
+     * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @throws \Exception
      */
     public function execute($entity, $arguments = [])

@@ -13,6 +13,13 @@ namespace Smile\RetailerOfferInventory\Api\Data;
 
 use Magento\Framework\Api\SearchResultsInterface;
 
+/**
+ * Interface StockItemResultsInterface
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 interface StockItemResultsInterface extends SearchResultsInterface
 {
     /**

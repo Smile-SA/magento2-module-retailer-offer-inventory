@@ -17,6 +17,13 @@ use Smile\Offer\Model\Offer;
 use Smile\RetailerOfferInventory\Model\Stock\ItemFactory as StockItemFactory;
 use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResource;
 
+/**
+ * Class DataReadHandler
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class DataReadHandler implements ExtensionInterface
 {
     /**
@@ -44,6 +51,7 @@ class DataReadHandler implements ExtensionInterface
      * @param array  $arguments
      *
      * @return object|bool
+     * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @throws \Exception
      */
     public function execute($entity, $arguments = [])
@@ -57,5 +65,4 @@ class DataReadHandler implements ExtensionInterface
 
         return $entity;
     }
-
 }

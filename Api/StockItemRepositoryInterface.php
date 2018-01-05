@@ -11,6 +11,13 @@
 
 namespace Smile\RetailerOfferInventory\Api;
 
+/**
+ * Interface StockItemRepositoryInterface
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 interface StockItemRepositoryInterface
 {
     /**

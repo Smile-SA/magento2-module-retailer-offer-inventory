@@ -13,6 +13,13 @@ namespace Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
+/**
+ * Class Collection
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class Collection extends AbstractCollection
 {
     /**

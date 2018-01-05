@@ -15,6 +15,13 @@ use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
+/**
+ * Class Item
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class Item extends AbstractModel implements StockItemInterface, IdentityInterface
 {
     const CACHE_TAG = 'retailer_offer_inventory_stock_item';

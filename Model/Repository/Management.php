@@ -20,6 +20,13 @@ use Magento\Framework\Data\Collection\AbstractDb as AbstractCollection;
 use Magento\Framework\Phrase;
 use Magento\Framework\Model\AbstractModel;
 
+/**
+ * Class Management
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 class Management
 {
     /**

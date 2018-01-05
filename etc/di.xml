@@ -57,4 +57,8 @@
             </argument>
         </arguments>
     </type>
+    <type name="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
+        <plugin name="smile-retailerofferinventory-indexer-fulltext-datasource-oOfferdata-plugin"
+                type="Smile\RetailerOfferInventory\Plugin\Model\Product\Indexer\Fulltext\Datasource\OfferData"/>
+    </type>
 </config>

@@ -11,6 +11,13 @@
 
 namespace Smile\RetailerOfferInventory\Api\Data;
 
+/**
+ * Interface StockItemInterface
+ *
+ * @category Smile
+ * @package  Smile\RetailerOfferInventory
+ * @author   Fanny DECLERCK <fadec@smile.fr>
+ */
 interface StockItemInterface
 {
     const TABLE_NAME         = 'smile_retailer_inventory_stock_item';
