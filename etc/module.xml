@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module RetailerOfferInventory
+ *
+ * @category  Smile
+ * @package   Smile\RetailerOfferInventory
+ * @author    Fanny DECLERCK <fadec@smile.fr>
+ * @copyright 2018 Smile
+ * @license   http://www.bricoman.it Proprietary
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+<module name="Smile_RetailerOfferInventory" setup_version="1.0.0">
+    <sequence>
+        <module name="Smile_RetailerOffer" />
+    </sequence>
+</module>
+</config>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module RetailerOfferInventory
+ *
+ * @category  Smile
+ * @package   Smile\RetailerOfferInventory
+ * @author    Fanny DECLERCK <fadec@smile.fr>
+ * @copyright 2018 Smile
+ * @license   http://www.bricoman.it Proprietary
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smile\RetailerOfferInventory\Api\Data\StockItemInterface" type="Smile\RetailerOfferInventory\Model\Stock\Item" />
+    <preference for="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" type="Smile\RetailerOfferInventory\Model\Repository\Stock\Item" />
+
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Smile\RetailerOfferInventory\Api\Data\StockItemInterface"
+                      xsi:type="string">Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Smile\RetailerOfferInventory\Api\Data\StockItemInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">smile_retailer_inventory_stock_item</item>
+                    <item name="identifierField" xsi:type="string">item_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Smile\RetailerOfferInventory\Api\Data\StockItemInterface"
+                      xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Smile\Offer\Api\Data\OfferInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="create_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataSaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="update_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataSaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="read_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
