@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin
+ * Plugin OfferDataPlugin
  *
  * @category  Smile
  * @package   Smile\RetailerOfferInventory
@@ -9,21 +9,21 @@
  * @license   Open Software License ("OSL") v. 3.0
  */
 
-namespace Smile\RetailerOfferInventory\Plugin\Model\Product\Indexer\Fulltext\Datasource;
+namespace Smile\RetailerOfferInventory\Plugin;
 
 use Smile\RetailerOfferInventory\Model\ResourceModel\Product\Indexer\Fulltext\Datasource\Offer\StockData
     as ResourceModel;
-use Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData as OfferDataOriginalClass;
+use Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
- * Class OfferData
+ * Class OfferDataPlugin
  *
  * @category Smile
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class OfferData
+class OfferDataPlugin
 {
     /**
      * @var ResourceModel
@@ -43,16 +43,16 @@ class OfferData
     /**
      * Add stock status in product index after add offer to index data.
      *
-     * @param OfferDataOriginalClass $offerData
-     * @param array                  $result
-     * @param integer                $storeId
-     * @param array                  $indexData
+     * @param OfferData $offerData
+     * @param array     $result
+     * @param integer   $storeId
+     * @param array     $indexData
      *
      * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")
      */
     public function afterAddData(
-        OfferDataOriginalClass $offerData,
+        OfferData $offerData,
         $result,
         $storeId,
         array $indexData

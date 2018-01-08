@@ -58,7 +58,9 @@
         </arguments>
     </type>
     <type name="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
-        <plugin name="smile-retailerofferinventory-indexer-fulltext-datasource-oOfferdata-plugin"
-                type="Smile\RetailerOfferInventory\Plugin\Model\Product\Indexer\Fulltext\Datasource\OfferData"/>
+        <plugin name="addOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\OfferDataPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="filterOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\LayerPlugin"/>
     </type>
 </config>
