@@ -170,7 +170,7 @@ class OfferStock extends AbstractHelper
     }
 
     /**
-     * Retrieve Current Offer for the product.
+     * Retrieve Current Offer stock for the product.
      *
      * @param int $productId
      *
@@ -193,5 +193,31 @@ class OfferStock extends AbstractHelper
         }
 
         return $offerStock;
+    }
+
+    /**
+     * Retrieve Current Offer for the product.
+     *
+     * @param int $productId
+     *
+     * @return OfferInterface
+     * @throws \Exception
+     */
+    public function getCurrentOffer($productId)
+    {
+        $offer = null;
+        $retailerId = null;
+        if ($this->currentStore->getRetailer() && $this->currentStore->getRetailer()->getId()) {
+            $retailerId = $this->currentStore->getRetailer()->getId();
+        }
+
+        if ($retailerId) {
+            $offer = $this->getOffer(
+                $productId,
+                $retailerId
+            );
+        }
+
+        return $offer;
     }
 }

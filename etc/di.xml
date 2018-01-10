@@ -72,4 +72,7 @@
     <type name="Smile\RetailerOffer\Block\Catalog\Product\Retailer\Availability">
         <plugin name="setAvailableDataByOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\AvailabilityPlugin"/>
     </type>
+    <type name="Magento\Catalog\Helper\Product">
+        <plugin name="initProductAvailableByOffer" type="Smile\RetailerOfferInventory\Plugin\HelperProductPlugin"/>
+    </type>
 </config>

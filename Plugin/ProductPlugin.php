@@ -34,11 +34,6 @@ class ProductPlugin extends RetailerOfferProductPlugin
     private $helper;
 
     /**
-     * @var OfferHelper
-     */
-    private $helperOffer;
-
-    /**
      * ProductPlugin constructor.
      *
      * @param CurrentStore     $currentStore     The Retailer Data Object
@@ -56,8 +51,7 @@ class ProductPlugin extends RetailerOfferProductPlugin
     ) {
         parent::__construct($offerHelper, $currentStore, $state, $settingsHelper);
 
-        $this->helperOffer = $offerHelper;
-        $this->helper      = $offerStockHelper;
+        $this->helper = $offerStockHelper;
     }
 
     /**
