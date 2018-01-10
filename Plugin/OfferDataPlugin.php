@@ -58,10 +58,12 @@ class OfferDataPlugin
         array $indexData
     ) {
         foreach ($result as $productId => $dataRow) {
-            foreach ($dataRow['offer'] as $key => $offerDataRow) {
-                $offerStockData = $this->resourceModel
-                    ->loadOfferStockData($offerDataRow[StockItemInterface::FIELD_OFFER_ID]);
-                $result[$productId]['offer'][$key][StockItemInterface::FIELD_IS_IN_STOCK] = $offerStockData;
+            if (isset($dataRow['offer']) && $dataRow['offer'] !== null) {
+                foreach ($dataRow['offer'] as $key => $offerDataRow) {
+                    $offerStockData = $this->resourceModel
+                        ->loadOfferStockData($offerDataRow[StockItemInterface::FIELD_OFFER_ID]);
+                    $result[$productId]['offer'][$key][StockItemInterface::FIELD_IS_IN_STOCK] = $offerStockData;
+                }
             }
         }
 
