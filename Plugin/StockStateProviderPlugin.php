@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin StockItemPlugin
+ * Plugin StockStateProviderPlugin
  *
  * @category  Smile
  * @package   Smile\RetailerOfferInventory
@@ -11,17 +11,18 @@
 
 namespace Smile\RetailerOfferInventory\Plugin;
 
-use Magento\CatalogInventory\Model\Stock\Item;
+use Magento\CatalogInventory\Model\StockStateProvider;
+use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
 
 /**
- * Class StockItemPlugin
+ * Class StockStateProviderPlugin
  *
  * @category Smile
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class StockItemPlugin
+class StockStateProviderPlugin
 {
     /**
      * @var OfferStockHelper
@@ -29,7 +30,7 @@ class StockItemPlugin
     private $helper;
 
     /**
-     * StockItemPlugin constructor.
+     * HelperProductPlugin constructor.
      *
      * @param OfferStockHelper $offerStockHelper The Offer stock helper
      */
@@ -40,24 +41,27 @@ class StockItemPlugin
     }
 
     /**
-     * Return offer availability (if any) instead of the product one.
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter) We do not need to call the parent method.
+     * Check quantity
      *
-     * @param Item $item   The item
-     * @param Item $result Result
+     * @param StockStateProvider $stockState
+     * @param StockItemInterface $stockItem
+     * @param int|float          $qty
      *
-     * @return Item
+     * @return array
+     * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @throws \Exception
      */
-    public function afterSetIsInStock(Item $item, $result)
-    {
+    public function beforeCheckQty(
+        StockStateProvider $stockState,
+        StockItemInterface $stockItem,
+        $qty
+    ) {
         if ($this->helper->useStoreOffers()) {
-            $offerStock  = $this->helper->getCurrentOfferStock($item->getProductId());
-            if ($offerStock !== null && $offerStock->getIsInStock() === 0) {
-                return $this->setData(Item::IS_IN_STOCK, $offerStock->getIsInStock());
+            if ($stockItem->getQty() - $qty < 0) {
+                $stockItem->setManageStock(false);
             }
         }
 
-        return $result;
+        return [$stockItem, $qty];
     }
 }

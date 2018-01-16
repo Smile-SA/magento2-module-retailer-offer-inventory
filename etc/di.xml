@@ -57,14 +57,12 @@
             </argument>
         </arguments>
     </type>
+    <!-- PLUGIN -->
     <type name="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
         <plugin name="addOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\OfferDataPlugin"/>
     </type>
     <type name="Magento\Catalog\Model\Layer">
         <plugin name="filterOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\LayerPlugin"/>
-    </type>
-    <type name="Magento\CatalogInventory\Model\Stock\Item">
-        <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockItemPlugin"/>
     </type>
     <type name="Magento\Catalog\Model\Product">
         <plugin name="addRetailerOfferData" type="Smile\RetailerOfferInventory\Plugin\ProductPlugin"/>
@@ -75,4 +73,16 @@
     <type name="Magento\Catalog\Helper\Product">
         <plugin name="initProductAvailableByOffer" type="Smile\RetailerOfferInventory\Plugin\HelperProductPlugin"/>
     </type>
+    <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
+        <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Stock\Item">
+        <plugin name="setOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\StockItemPlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="checkQtyOffer" type="Smile\RetailerOfferInventory\Plugin\StockStateProviderPlugin"/>
+    </type>
+    <!-- Rewrite -->
+    <preference for="Magento\CatalogInventory\Model\ResourceModel\Stock"
+                type="Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Model\ResourceModel\Stock"/>
 </config>

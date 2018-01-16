@@ -220,4 +220,28 @@ class OfferStock extends AbstractHelper
 
         return $offer;
     }
+
+    /**
+     * @param array $offerIds
+     *
+     * @return OfferStock
+     */
+    public function flushOfferStockCache($offerIds)
+    {
+        $retailerId = null;
+        if ($this->currentStore->getRetailer() && $this->currentStore->getRetailer()->getId()) {
+            $retailerId = $this->currentStore->getRetailer()->getId();
+        }
+
+        if ($retailerId) {
+            foreach ($offerIds as $id) {
+                $cacheKey = implode('_', [$id, $retailerId]);
+                if (false === isset($this->offersStockCache[$cacheKey])) {
+                    unset($this->offersStockCache[$cacheKey]);
+                }
+            }
+        }
+
+        return $this;
+    }
 }
