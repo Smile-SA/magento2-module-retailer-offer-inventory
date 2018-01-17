@@ -75,13 +75,14 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
 
         if ($this->helper->useStoreOffers()) {
             $connection = $this->getConnection();
-            $conditions = $outOfStock = [];
+            $conditions = $outOfStock = $offerIds = [];
 
             foreach ($items as $productId => $qty) {
                 $offerStock  = $this->helper->getCurrentOfferStock($productId);
                 $case = $connection->quoteInto('?', $offerStock->getOfferId());
                 $result = $connection->quoteInto("qty{$operator}?", $qty);
                 $conditions[$case] = $result;
+                $offerIds[] = $offerStock->getOfferId();
 
                 if ($qty <= 0) {
                     $outOfStock[] = $offerStock->getOfferId();
@@ -93,8 +94,7 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
                 $conditions,
                 'qty'
             );
-
-            $where = [StockItemInterface::FIELD_OFFER_ID . ' IN (?)' => array_keys($items)];
+            $where = [StockItemInterface::FIELD_OFFER_ID . ' IN (?)' => $offerIds];
 
             $connection->beginTransaction();
             $connection->update(
