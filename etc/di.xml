@@ -12,7 +12,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Smile\RetailerOfferInventory\Api\Data\StockItemInterface" type="Smile\RetailerOfferInventory\Model\Stock\Item" />
-    <preference for="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" type="Smile\RetailerOfferInventory\Model\Repository\Stock\Item" />
+    <preference for="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" type="Smile\RetailerOfferInventory\Model\StockItemRepository" />
     <preference for="Smile\RetailerOfferInventory\Api\StockManagementInterface" type="Smile\RetailerOfferInventory\Model\StockManagement" />
 
     <type name="Magento\Framework\Model\Entity\RepositoryFactory">
@@ -46,42 +46,17 @@
             <argument name="extensionActions" xsi:type="array">
                 <item name="Smile\Offer\Api\Data\OfferInterface" xsi:type="array">
                     <item name="create" xsi:type="array">
-                        <item name="create_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataSaveHandler</item>
+                        <item name="create_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\SaveHandler</item>
                     </item>
                     <item name="update" xsi:type="array">
-                        <item name="update_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataSaveHandler</item>
+                        <item name="update_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\SaveHandler</item>
                     </item>
                     <item name="read" xsi:type="array">
-                        <item name="read_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\DataReadHandler</item>
+                        <item name="read_offer_item_inventory" xsi:type="string">Smile\RetailerOfferInventory\Model\Stock\Item\ReadHandler</item>
                     </item>
                 </item>
             </argument>
         </arguments>
-    </type>
-    <!-- PLUGIN -->
-    <type name="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
-        <plugin name="addOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\OfferDataPlugin"/>
-    </type>
-    <type name="Magento\Catalog\Model\Layer">
-        <plugin name="filterOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\LayerPlugin"/>
-    </type>
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="addRetailerOfferData" type="Smile\RetailerOfferInventory\Plugin\ProductPlugin"/>
-    </type>
-    <type name="Smile\RetailerOffer\Block\Catalog\Product\Retailer\Availability">
-        <plugin name="setAvailableDataByOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\AvailabilityPlugin"/>
-    </type>
-    <type name="Magento\Catalog\Helper\Product">
-        <plugin name="initProductAvailableByOffer" type="Smile\RetailerOfferInventory\Plugin\HelperProductPlugin"/>
-    </type>
-    <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
-        <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
-    </type>
-    <type name="Magento\CatalogInventory\Model\Stock\Item">
-        <plugin name="setOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\StockItemPlugin"/>
-    </type>
-    <type name="Magento\CatalogInventory\Model\StockStateProvider">
-        <plugin name="checkQtyOffer" type="Smile\RetailerOfferInventory\Plugin\StockStateProviderPlugin"/>
     </type>
     <!-- Rewrite -->
     <preference for="Magento\CatalogInventory\Model\ResourceModel\Stock"

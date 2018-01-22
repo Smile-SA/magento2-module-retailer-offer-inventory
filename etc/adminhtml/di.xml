@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module RetailerOfferInventory
+ *
+ * @category  Smile
+ * @package   Smile\RetailerOfferInventory
+ * @author    Fanny DECLERCK <fadec@smile.fr>
+ * @copyright 2018 Smile
+ * @license   http://www.bricoman.it Proprietary
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Rewrite -->
+    <preference for="Magento\CatalogInventory\Observer\CancelOrderItemObserver"
+                type="Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Observer\CancelOrderItemObserver"/>
+    <preference for="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData"
+                type="Smile\RetailerOfferInventory\Rewrite\Model\Offer\Product\Indexer\Fulltext\Datasource\OfferData"/>
+</config>

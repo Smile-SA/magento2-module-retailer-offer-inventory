@@ -134,7 +134,26 @@ class Item extends AbstractDb
     }
 
     /**
-     * Get the id of an object
+     * @param array $values
+     * @param array $fields
+     *
+     * @return $this
+     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function insertOnDuplicate($values, $fields)
+    {
+        $this->getConnection()->insertOnDuplicate(
+            $this->getMainTable(),
+            $values,
+            $fields
+        );
+
+        return $this;
+    }
+
+    /**
+     * Get the id of an object with all table field
      *
      * @param mixed $value
      * @param null  $field

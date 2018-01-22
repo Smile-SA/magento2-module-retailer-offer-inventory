@@ -13,18 +13,17 @@ namespace Smile\RetailerOfferInventory\Model\Stock\Item;
 
 use Magento\Framework\EntityManager\Operation\ExtensionInterface;
 use Smile\Offer\Model\Offer;
-//use Smile\RetailerOfferInventory\Model\Stock\Item;
 use Smile\RetailerOfferInventory\Model\Stock\ItemFactory as StockItemFactory;
 use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResource;
 
 /**
- * Class DataReadHandler
+ * Class ReadHandler
  *
  * @category Smile
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class DataReadHandler implements ExtensionInterface
+class ReadHandler implements ExtensionInterface
 {
     /**
      * @var StockItemFactory
@@ -56,11 +55,10 @@ class DataReadHandler implements ExtensionInterface
      */
     public function execute($entity, $arguments = [])
     {
-        /** @var OfferData $offerData */
-        $offerData = $this->stockItemFactory->create();
-        $this->stockItemResource->load($offerData, $entity->getId(), 'offer_id');
+        $stockItem = $this->stockItemFactory->create();
+        $this->stockItemResource->load($stockItem, $entity->getId(), 'offer_id');
         $attributes = $entity->getExtensionAttributes() ?: [];
-        $attributes['offer_stock'] = $offerData->getData();
+        $attributes['offer_stock'] = $stockItem->getData();
         $entity->setExtensionAttributes($attributes);
 
         return $entity;

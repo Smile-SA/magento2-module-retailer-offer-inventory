@@ -61,6 +61,8 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
     }
 
     /**
+     * Update stock after place order
+     *
      * {@inheritdoc}
      */
     public function correctItemsQty(array $items, $websiteId, $operator)
@@ -94,6 +96,7 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
                 $conditions,
                 'qty'
             );
+
             $where = [StockItemInterface::FIELD_OFFER_ID . ' IN (?)' => $offerIds];
 
             $connection->beginTransaction();
@@ -102,11 +105,13 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
                 [StockItemInterface::FIELD_QTY => $value],
                 $where
             );
-            $connection->commit();
+
 
             if (!empty($outOfStock)) {
                 $this->setOutOfStock($outOfStock);
             }
+
+            $connection->commit();
         }
     }
 

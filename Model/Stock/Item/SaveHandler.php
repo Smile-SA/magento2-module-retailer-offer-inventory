@@ -16,13 +16,13 @@ use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemReso
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
- * Class DataSaveHandler
+ * Class SaveHandler
  *
  * @category Smile
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class DataSaveHandler implements ExtensionInterface
+class SaveHandler implements ExtensionInterface
 {
     /**
      * @var StockItemResource
@@ -66,11 +66,7 @@ class DataSaveHandler implements ExtensionInterface
             },
             ARRAY_FILTER_USE_KEY
         );
-        $this->stockItemResource->getConnection()->insertOnDuplicate(
-            $this->stockItemResource->getMainTable(),
-            $offerData,
-            array_keys($offerData)
-        );
+        $this->stockItemResource->insertOnDuplicate($offerData, array_keys($offerData));
 
         return $entity;
     }

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module RetailerOfferInventory
+ *
+ * @category  Smile
+ * @package   Smile\RetailerOfferInventory
+ * @author    Fanny DECLERCK <fadec@smile.fr>
+ * @copyright 2018 Smile
+ * @license   http://www.bricoman.it Proprietary
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- PLUGIN -->
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="filterOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\LayerPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="addRetailerOfferData" type="Smile\RetailerOfferInventory\Plugin\ProductPlugin"/>
+    </type>
+    <type name="Smile\RetailerOffer\Block\Catalog\Product\Retailer\Availability">
+        <plugin name="setAvailableDataByOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\AvailabilityPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Product">
+        <plugin name="initProductAvailableByOffer" type="Smile\RetailerOfferInventory\Plugin\HelperProductPlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
+        <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Stock\Item">
+        <plugin name="setOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\StockItemPlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="checkQtyOffer" type="Smile\RetailerOfferInventory\Plugin\StockStateProviderPlugin"/>
+    </type>
+
+</config>

@@ -8,11 +8,11 @@
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
-namespace Smile\RetailerOfferInventory\Observer;
+namespace Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Observer;
 
-use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
 use Smile\RetailerOfferInventory\Api\StockManagementInterface;
+use Magento\CatalogInventory\Api\StockManagementInterface as ManagementInterface;
 
 /**
  * Class OfferStockManagement
@@ -21,7 +21,7 @@ use Smile\RetailerOfferInventory\Api\StockManagementInterface;
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class CancelOrderItemObserver implements ObserverInterface
+class CancelOrderItemObserver extends \Magento\CatalogInventory\Observer\CancelOrderItemObserver
 {
     /**
      * @var StockManagementInterface
@@ -29,11 +29,18 @@ class CancelOrderItemObserver implements ObserverInterface
     protected $stockManagement;
 
     /**
-     * @param StockManagementInterface $stockManagement
+     * CancelOrderItemObserver constructor.
+     *
+     * @param ManagementInterface                                    $managementInterface
+     * @param \Magento\Catalog\Model\Indexer\Product\Price\Processor $priceIndexer
+     * @param StockManagementInterface                               $stockManagement
      */
     public function __construct(
+        ManagementInterface $managementInterface,
+        \Magento\Catalog\Model\Indexer\Product\Price\Processor $priceIndexer,
         StockManagementInterface $stockManagement
     ) {
+        parent::__construct($managementInterface, $priceIndexer);
         $this->stockManagement = $stockManagement;
     }
 
