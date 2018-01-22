@@ -118,7 +118,7 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
     /**
      * Set items out of stock basing on their quantities and config settings
      *
-     * @param array $outOfStock
+     * @param array $outOfStock Out of stock offer id.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @return void

@@ -133,5 +133,4 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     {
         $this->_init(\Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item::class);
     }
-
 }

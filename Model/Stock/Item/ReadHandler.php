@@ -38,7 +38,7 @@ class ReadHandler implements ExtensionInterface
     /**
      * ReadHandler constructor.
      *
-     * @param StockItemFactory $stockItemFactory   Stock item factory.
+     * @param StockItemFactory  $stockItemFactory  Stock item factory.
      * @param StockItemResource $stockItemResource Stock item resource.
      */
     public function __construct(

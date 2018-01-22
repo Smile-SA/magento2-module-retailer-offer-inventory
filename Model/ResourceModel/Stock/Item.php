@@ -121,6 +121,8 @@ class Item extends AbstractDb
     }
 
     /**
+     * Insert or update lines
+     *
      * @param array $values Values
      * @param array $fields Fields
      *
@@ -166,6 +168,7 @@ class Item extends AbstractDb
             $result = $this->getConnection()->fetchCol($select);
             $entityId = count($result) ? $result[0] : false;
         }
+
         return $entityId;
     }
 

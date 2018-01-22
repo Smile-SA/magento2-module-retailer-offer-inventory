@@ -88,7 +88,6 @@ class StockItemRepository implements StockItemRepositoryInterface
         $this->objectResource->load($object, $itemId);
 
         if (!$object->getId()) {
-            // object does not exist
             throw  NoSuchEntityException::singleField('objectId', $itemId);
         }
 
@@ -110,7 +109,6 @@ class StockItemRepository implements StockItemRepositoryInterface
         $this->objectResource->load($object, $offerId, StockItemInterface::FIELD_OFFER_ID);
 
         if (!$object->getId()) {
-            // object does not exist
             throw NoSuchEntityException::singleField(StockItemInterface::FIELD_OFFER_ID, $offerId);
         }
 
@@ -137,10 +135,7 @@ class StockItemRepository implements StockItemRepositoryInterface
             $this->collectionProcessor->process($searchCriteria, $collection);
         }
 
-        // load the collection
         $collection->load();
-
-        // build the result
         $searchResults->setTotalCount($collection->getSize());
         $searchResults->setItems($collection->getItems());
 
@@ -178,6 +173,7 @@ class StockItemRepository implements StockItemRepositoryInterface
     public function deleteById($itemId)
     {
         $stockItem = $this->getById($itemId);
+
         return $this->delete($stockItem);
     }
 
@@ -192,6 +188,7 @@ class StockItemRepository implements StockItemRepositoryInterface
     public function deleteByOfferId($offerId)
     {
         $stockItem = $this->getByOfferId($offerId);
+
         return $this->delete($stockItem);
     }
 
