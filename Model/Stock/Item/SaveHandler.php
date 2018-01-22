@@ -29,6 +29,10 @@ class SaveHandler implements ExtensionInterface
      */
     private $stockItemResource;
 
+    /**
+     * SaveHandler constructor.
+     * @param StockItemResource $stockItemResource Stock item resource
+     */
     public function __construct(StockItemResource $stockItemResource)
     {
         $this->stockItemResource = $stockItemResource;
@@ -37,8 +41,8 @@ class SaveHandler implements ExtensionInterface
     /**
      * Perform action on relation/extension attribute
      *
-     * @param StockItemInterface|object $entity
-     * @param array  $arguments
+     * @param StockItemInterface|object $entity    Entity
+     * @param array                     $arguments Arguments
      *
      * @return object|bool
      * @SuppressWarnings("PMD.UnusedFormalParameter")
@@ -60,7 +64,7 @@ class SaveHandler implements ExtensionInterface
                     [
                         StockItemInterface::FIELD_OFFER_ID,
                         StockItemInterface::FIELD_QTY,
-                        StockItemInterface::FIELD_IS_IN_STOCK
+                        StockItemInterface::FIELD_IS_IN_STOCK,
                     ]
                 );
             },

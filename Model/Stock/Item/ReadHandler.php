@@ -35,6 +35,12 @@ class ReadHandler implements ExtensionInterface
      */
     private $stockItemResource;
 
+    /**
+     * ReadHandler constructor.
+     *
+     * @param StockItemFactory $stockItemFactory   Stock item factory.
+     * @param StockItemResource $stockItemResource Stock item resource.
+     */
     public function __construct(
         StockItemFactory $stockItemFactory,
         StockItemResource $stockItemResource
@@ -46,8 +52,8 @@ class ReadHandler implements ExtensionInterface
     /**
      * Perform action on relation/extension attribute
      *
-     * @param Offer|object $entity
-     * @param array  $arguments
+     * @param Offer|object $entity    Entity
+     * @param array        $arguments Arguments
      *
      * @return object|bool
      * @SuppressWarnings("PMD.UnusedFormalParameter")

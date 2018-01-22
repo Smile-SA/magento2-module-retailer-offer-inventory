@@ -31,13 +31,13 @@ class Stock extends \Magento\CatalogInventory\Model\ResourceModel\Stock
     private $helper;
 
     /**
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context  $context
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime        $dateTime
-     * @param StockConfigurationInterface                        $stockConfiguration
-     * @param StoreManagerInterface                              $storeManager
-     * @param OfferStockHelper                                   $offerStockHelper
-     * @param string|null                                        $connectionName
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context  $context            Context
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig        Scope config
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime        $dateTime           Datetime
+     * @param StockConfigurationInterface                        $stockConfiguration Stock configuration
+     * @param StoreManagerInterface                              $storeManager       StoreManager
+     * @param OfferStockHelper                                   $offerStockHelper   Offer Stock Helper
+     * @param string|null                                        $connectionName     Connection Name
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,

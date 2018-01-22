@@ -124,8 +124,8 @@ class OfferStock extends AbstractHelper
      *
      * @return StockItemInterface
      * @throws \Exception
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-
     public function getOfferStock($productId, $retailerId)
     {
         $offerStock = null;
@@ -172,7 +172,7 @@ class OfferStock extends AbstractHelper
     /**
      * Retrieve Current Offer stock for the product.
      *
-     * @param int $productId
+     * @param int $productId Product id.
      *
      * @return StockItemInterface
      * @throws \Exception
@@ -198,7 +198,7 @@ class OfferStock extends AbstractHelper
     /**
      * Retrieve Current Offer for the product.
      *
-     * @param int $productId
+     * @param int $productId Product id.
      *
      * @return OfferInterface
      * @throws \Exception
@@ -222,7 +222,7 @@ class OfferStock extends AbstractHelper
     }
 
     /**
-     * @param array $offerIds
+     * @param array $offerIds Offer ids.
      *
      * @return OfferStock
      */

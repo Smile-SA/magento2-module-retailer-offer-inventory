@@ -43,9 +43,9 @@ class StockStateProviderPlugin
     /**
      * Check quantity
      *
-     * @param StockStateProvider $stockState
-     * @param StockItemInterface $stockItem
-     * @param int|float          $qty
+     * @param StockStateProvider $stockState Stock state
+     * @param StockItemInterface $stockItem  Stock item
+     * @param int|float          $qty        Quantity
      *
      * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")

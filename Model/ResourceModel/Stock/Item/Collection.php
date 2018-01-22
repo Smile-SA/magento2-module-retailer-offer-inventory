@@ -25,7 +25,7 @@ class Collection extends AbstractCollection
     /**
      * Define resource model
      *
-     * @return void
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     protected function _construct()
     {

@@ -32,7 +32,7 @@ class AvailabilityPlugin
     /**
      * AvailabilityPlugin constructor.
      *
-     * @param StockItemRepository      $stockItemRepository The stock item
+     * @param StockItemRepository $stockItemRepository The stock item
      *
      */
     public function __construct(
@@ -44,8 +44,8 @@ class AvailabilityPlugin
     /**
      * Set Available by offer stock status
      *
-     * @param Availability $availability
-     * @param \Closure     $proceed
+     * @param Availability $availability Availability
+     * @param \Closure     $proceed      Proceed
      *
      * @return array
      * @throws \Exception

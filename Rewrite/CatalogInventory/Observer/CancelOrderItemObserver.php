@@ -31,9 +31,9 @@ class CancelOrderItemObserver extends \Magento\CatalogInventory\Observer\CancelO
     /**
      * CancelOrderItemObserver constructor.
      *
-     * @param ManagementInterface                                    $managementInterface
-     * @param \Magento\Catalog\Model\Indexer\Product\Price\Processor $priceIndexer
-     * @param StockManagementInterface                               $stockManagement
+     * @param ManagementInterface                                    $managementInterface ManagementInterface
+     * @param \Magento\Catalog\Model\Indexer\Product\Price\Processor $priceIndexer        Price indexer
+     * @param StockManagementInterface                               $stockManagement     Stock management
      */
     public function __construct(
         ManagementInterface $managementInterface,
@@ -48,7 +48,7 @@ class CancelOrderItemObserver extends \Magento\CatalogInventory\Observer\CancelO
     /**
      * Cancel order item
      *
-     * @param   EventObserver $observer
+     * @param   EventObserver $observer Observer
      * @return  void
      */
     public function execute(EventObserver $observer)

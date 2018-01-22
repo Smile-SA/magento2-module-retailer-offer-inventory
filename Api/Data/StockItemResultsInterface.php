@@ -32,7 +32,7 @@ interface StockItemResultsInterface extends SearchResultsInterface
     /**
      * Set stock list.
      *
-     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface[] $items
+     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface[] $items Items.
      * @return $this
      */
     public function setItems(array $items);

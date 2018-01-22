@@ -36,9 +36,9 @@ class ProductPlugin extends RetailerOfferProductPlugin
     /**
      * ProductPlugin constructor.
      *
-     * @param CurrentStore     $currentStore     The Retailer Data Object
      * @param OfferStockHelper $offerStockHelper The Offer stock helper
      * @param OfferHelper      $offerHelper      The Offer helper
+     * @param CurrentStore     $currentStore     The Retailer Data Object
      * @param State            $state            The state
      * @param Settings         $settingsHelper   The settings helper
      */

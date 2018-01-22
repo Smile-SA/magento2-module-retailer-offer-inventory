@@ -27,14 +27,6 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     const CACHE_TAG = 'retailer_offer_inventory_stock_item';
 
     /**
-     * @return void
-     */
-    protected function _construct()
-    {
-        $this->_init(\Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item::class);
-    }
-
-    /**
      * Get identities
      *
      * @return array
@@ -45,7 +37,9 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Get item_id
+     *
+     * @return int
      */
     public function getItemId()
     {
@@ -53,7 +47,9 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Get offer_id
+     *
+     * @return int
      */
     public function getOfferId()
     {
@@ -61,7 +57,9 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Get qty
+     *
+     * @return int
      */
     public function getQty()
     {
@@ -69,7 +67,9 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Get is_in_stock
+     *
+     * @return int
      */
     public function getIsInStock()
     {
@@ -77,7 +77,11 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Set field: item_id
+     *
+     * @param int $value Item id.
+     *
+     * @return StockItemInterface
      */
     public function setItemId($value)
     {
@@ -85,7 +89,11 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Set field: offer_id
+     *
+     * @param int $value Offer id.
+     *
+     * @return StockItemInterface
      */
     public function setOfferId($value)
     {
@@ -93,7 +101,11 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Set field: qty
+     *
+     * @param int $value Quantity.
+     *
+     * @return StockItemInterface
      */
     public function setQty($value)
     {
@@ -101,10 +113,25 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     }
 
     /**
-     * @inheritdoc
+     * Set field: is_in_stock
+     *
+     * @param int $value Is in stock.
+     *
+     * @return StockItemInterface
      */
     public function setIsInStock($value)
     {
         return $this->setData(self::FIELD_IS_IN_STOCK, (int) $value);
     }
+
+    /**
+     * Internal Constructor
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+     */
+    protected function _construct()
+    {
+        $this->_init(\Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item::class);
+    }
+
 }

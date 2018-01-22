@@ -57,7 +57,7 @@ interface StockItemInterface
     /**
      * Set field: item_id
      *
-     * @param int $value
+     * @param int $value Item id.
      *
      * @return StockItemInterface
      */
@@ -66,7 +66,7 @@ interface StockItemInterface
     /**
      * Set field: offer_id
      *
-     * @param int $value
+     * @param int $value Offer id.
      *
      * @return StockItemInterface
      */
@@ -75,7 +75,7 @@ interface StockItemInterface
     /**
      * Set field: qty
      *
-     * @param int $value
+     * @param int $value Quantity.
      *
      * @return StockItemInterface
      */
@@ -84,7 +84,7 @@ interface StockItemInterface
     /**
      * Set field: is_in_stock
      *
-     * @param int $value
+     * @param int $value Is in stock.
      *
      * @return StockItemInterface
      */

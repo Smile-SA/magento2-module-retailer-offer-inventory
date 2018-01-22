@@ -34,8 +34,8 @@ class StockManagement implements StockManagementInterface
     private $modelRepository;
 
     /**
-     * @param OfferStockHelper             $offerStockHelper
-     * @param StockItemRepositoryInterface $modelRepository
+     * @param OfferStockHelper             $offerStockHelper Offer stock helper
+     * @param StockItemRepositoryInterface $modelRepository  Model repository
      */
     public function __construct(
         OfferStockHelper $offerStockHelper,
@@ -48,17 +48,17 @@ class StockManagement implements StockManagementInterface
     /**
      * Get back to stock (when order is canceled or whatever else)
      *
-     * @param \Magento\Sales\Model\Order\Item $orderItem
-     * @param float                           $qty
+     * @param \Magento\Sales\Model\Order\Item $orderItem Order item
+     * @param float                           $qty       Quantity
      *
      * @return bool
      * @throws \Exception
      */
     public function backItemQty($orderItem, $qty)
     {
-        $seller_id = $orderItem->getOrder()->getSellerId();
+        $sellerId = $orderItem->getOrder()->getSellerId();
         $productId = $orderItem->getProductId();
-        $offerStock = $this->helper->getOfferStock($productId, $seller_id);
+        $offerStock = $this->helper->getOfferStock($productId, $sellerId);
 
         if ($offerStock !== null) {
             $offerStock->setQty($offerStock->getQty() + $qty);

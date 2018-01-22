@@ -43,10 +43,10 @@ class StockRegistryStoragePlugin
     /**
      * Set stock status and qty
      *
-     * @param StockRegistryStorage $stockRegistryStorage
-     * @param int                  $productId
-     * @param int                  $scopeId
-     * @param StockItemInterface   $value
+     * @param StockRegistryStorage $stockRegistryStorage Stock Registry Storage
+     * @param int                  $productId            Product id
+     * @param int                  $scopeId              Scope id
+     * @param StockItemInterface   $value                Value
      *
      * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")
@@ -71,7 +71,7 @@ class StockRegistryStoragePlugin
 
         return [$productId,
             $scopeId,
-            $value
+            $value,
         ];
     }
 }

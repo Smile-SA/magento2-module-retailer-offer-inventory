@@ -23,7 +23,7 @@ interface StockItemRepositoryInterface
     /**
      * Retrieve stock item inventory.
      *
-     * @param int $itemId
+     * @param int $itemId Item id.
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -32,7 +32,7 @@ interface StockItemRepositoryInterface
     /**
      * Retrieve stock item inventory by offer_id.
      *
-     * @param int $offerId
+     * @param int $offerId Offer id.
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -41,7 +41,7 @@ interface StockItemRepositoryInterface
     /**
      * Retrieve stock item inventory matching the specified criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria Search criteria.
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -50,7 +50,7 @@ interface StockItemRepositoryInterface
     /**
      * Save stock.
      *
-     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem
+     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem Stock item object.
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
@@ -59,7 +59,7 @@ interface StockItemRepositoryInterface
     /**
      * Delete stock by ID.
      *
-     * @param int $itemId
+     * @param int $itemId Item id.
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
@@ -69,7 +69,7 @@ interface StockItemRepositoryInterface
     /**
      * Delete stock by Offer ID.
      *
-     * @param int $offerId
+     * @param int $offerId Offer id.
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
@@ -79,7 +79,7 @@ interface StockItemRepositoryInterface
     /**
      * Delete stock.
      *
-     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem
+     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem Stock item object.
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException

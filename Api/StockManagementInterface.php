@@ -22,8 +22,8 @@ interface StockManagementInterface
     /**
      * Get back to stock (when order is canceled or whatever else)
      *
-     * @param \Magento\Sales\Model\Order\Item $stockItem
-     * @param float                           $qty
+     * @param \Magento\Sales\Model\Order\Item $stockItem Stock item object.
+     * @param float                           $qty       Quantity.
      *
      * @return bool
      */

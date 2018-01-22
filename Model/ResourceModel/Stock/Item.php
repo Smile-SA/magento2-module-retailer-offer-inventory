@@ -41,10 +41,10 @@ class Item extends AbstractDb
     /**
      * Class constructor
      *
-     * @param Context       $context
-     * @param EntityManager $entityManager
-     * @param MetadataPool  $metadataPool
-     * @param string        $connectionName
+     * @param Context       $context        Context
+     * @param EntityManager $entityManager  Entity Manager
+     * @param MetadataPool  $metadataPool   Metadata pool
+     * @param string        $connectionName Connection name
      */
     public function __construct(
         Context       $context,
@@ -56,19 +56,6 @@ class Item extends AbstractDb
 
         $this->entityManager = $entityManager;
         $this->metadataPool  = $metadataPool;
-    }
-
-    /**
-     * Magento Constructor
-     *
-     * @return void
-     */
-    protected function _construct()
-    {
-        $this->_init(
-            StockItemInterface::TABLE_NAME,
-            StockItemInterface::FIELD_ID
-        );
     }
 
     /**
@@ -85,9 +72,9 @@ class Item extends AbstractDb
     /**
      * Load an object
      *
-     * @param AbstractModel $object
-     * @param mixed         $value
-     * @param string        $field
+     * @param AbstractModel $object Object
+     * @param mixed         $value  Value
+     * @param string        $field  Field
      *
      * @return $this
      * @throws \Exception
@@ -106,7 +93,7 @@ class Item extends AbstractDb
     /**
      * Save an object
      *
-     * @param AbstractModel $object
+     * @param AbstractModel $object Object
      *
      * @return $this
      * @throws \Exception
@@ -121,7 +108,7 @@ class Item extends AbstractDb
     /**
      * Delete an object
      *
-     * @param AbstractModel $object
+     * @param AbstractModel $object Object
      *
      * @return $this
      * @throws \Exception
@@ -134,8 +121,8 @@ class Item extends AbstractDb
     }
 
     /**
-     * @param array $values
-     * @param array $fields
+     * @param array $values Values
+     * @param array $fields Fields
      *
      * @return $this
      * @throws \Exception
@@ -155,8 +142,8 @@ class Item extends AbstractDb
     /**
      * Get the id of an object with all table field
      *
-     * @param mixed $value
-     * @param null  $field
+     * @param mixed $value Value
+     * @param null  $field Field
      *
      * @return bool|int|string
      * @throws \Exception
@@ -164,7 +151,7 @@ class Item extends AbstractDb
     protected function getObjectId($value, $field = null)
     {
         $entityMetadata = $this->metadataPool->getMetadata(StockItemInterface::class);
-        if (is_null($field)) {
+        if ($field === null) {
             $field = $entityMetadata->getIdentifierField();
         }
         $entityId = $value;
@@ -180,5 +167,18 @@ class Item extends AbstractDb
             $entityId = count($result) ? $result[0] : false;
         }
         return $entityId;
+    }
+
+    /**
+     * Magento Constructor
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+     */
+    protected function _construct()
+    {
+        $this->_init(
+            StockItemInterface::TABLE_NAME,
+            StockItemInterface::FIELD_ID
+        );
     }
 }

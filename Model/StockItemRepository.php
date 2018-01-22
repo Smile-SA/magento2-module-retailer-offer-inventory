@@ -56,10 +56,10 @@ class StockItemRepository implements StockItemRepositoryInterface
     /**
      * Item constructor.
      *
-     * @param StockItemInterfaceFactory        $objectFactory
-     * @param StockItemResourceModel           $objectResource
-     * @param StockItemResultsInterfaceFactory $searchResultsFactory
-     * @param CollectionProcessor              $collectionProcessor
+     * @param StockItemInterfaceFactory        $objectFactory        Object factory
+     * @param StockItemResourceModel           $objectResource       Object resource
+     * @param StockItemResultsInterfaceFactory $searchResultsFactory Search Results Factory
+     * @param CollectionProcessor              $collectionProcessor  Collection Processor
      */
     public function __construct(
         StockItemInterfaceFactory        $objectFactory,
@@ -74,7 +74,11 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Retrieve stock item inventory.
+     *
+     * @param int $itemId Item id.
+     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @SuppressWarnings("PMD.StaticAccess")
      */
     public function getById($itemId)
@@ -92,7 +96,11 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Retrieve stock item inventory by offer_id.
+     *
+     * @param int $offerId Offer id.
+     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @SuppressWarnings("PMD.StaticAccess")
      */
     public function getByOfferId($offerId)
@@ -110,7 +118,11 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Retrieve stock item inventory matching the specified criteria.
+     *
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria Search criteria.
+     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
     {
@@ -136,7 +148,11 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Save stock.
+     *
+     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem Stock item object.
+     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function save(Data\StockItemInterface $stockItem)
     {
@@ -152,7 +168,12 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Delete stock by ID.
+     *
+     * @param int $itemId Item id.
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function deleteById($itemId)
     {
@@ -161,7 +182,12 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Delete stock by Offer ID.
+     *
+     * @param int $offerId Offer id.
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function deleteByOfferId($offerId)
     {
@@ -170,7 +196,12 @@ class StockItemRepository implements StockItemRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Delete stock.
+     *
+     * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem Stock item object.
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function delete(Data\StockItemInterface $stockItem)
     {

@@ -42,10 +42,10 @@ class HelperProductPlugin
     /**
      * Disable product if !available in offer
      *
-     * @param ProductHelper                        $productHelper
-     * @param int                                  $productId
-     * @param \Magento\Framework\App\Action\Action $controller
-     * @param \Magento\Framework\DataObject        $params
+     * @param ProductHelper                        $productHelper Product helper
+     * @param int                                  $productId     Product id
+     * @param \Magento\Framework\App\Action\Action $controller    Controller
+     * @param \Magento\Framework\DataObject        $params        Params
      *
      * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")
@@ -72,7 +72,7 @@ class HelperProductPlugin
 
         return [$productId,
             $controller,
-            $params
+            $params,
         ];
     }
 }
