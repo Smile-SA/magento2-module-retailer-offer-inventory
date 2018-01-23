@@ -3,11 +3,16 @@
 /**
  * Smile_RetailerOfferInventory indices configuration.
  *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future.
+ *
  * @category  Smile
  * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
- * @copyright 2017 Smile
- * @license   http://www.bricoman.it Proprietary
+ * @copyright 2018 Smile
+ * @license   Open Software License ("OSL") v. 3.0
  */
  -->
 <indices xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

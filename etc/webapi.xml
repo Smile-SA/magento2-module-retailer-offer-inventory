@@ -3,6 +3,11 @@
 /**
  * Module RetailerOfferInventory
  *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future.
+ *
  * @category  Smile
  * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
@@ -17,12 +22,14 @@
             <resource ref="Smile_RetailerOfferInventory::manage"/>
         </resources>
     </route>
+
     <route url="/V1/retailerofferinventory/:itemId" method="GET">
         <service class="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" method="getById"/>
         <resources>
             <resource ref="Smile_RetailerOfferInventory::manage"/>
         </resources>
     </route>
+
     <route url="/V1/retailerofferinventory/:offerId" method="GET">
         <service class="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" method="getByOfferId"/>
         <resources>
@@ -36,6 +43,7 @@
             <resource ref="Smile_RetailerOfferInventory::manage"/>
         </resources>
     </route>
+
     <route url="/V1/retailerofferinventory/:offerId" method="DELETE">
         <service class="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" method="deleteByOfferId"/>
         <resources>
