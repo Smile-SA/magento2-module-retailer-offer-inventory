@@ -14,6 +14,4 @@
     <!-- Rewrite -->
     <preference for="Magento\CatalogInventory\Observer\CancelOrderItemObserver"
                 type="Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Observer\CancelOrderItemObserver"/>
-    <preference for="Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData"
-                type="Smile\RetailerOfferInventory\Rewrite\Model\Offer\Product\Indexer\Fulltext\Datasource\OfferData"/>
 </config>

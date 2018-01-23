@@ -62,6 +62,13 @@
         </arguments>
     </type>
 
+    <!-- Inject another Resource Model for indexing -->
+    <type name="\Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">\Smile\RetailerOfferInventory\Model\ResourceModel\Product\Indexer\Fulltext\Datasource\OfferInventoryData</argument>
+        </arguments>
+    </type>
+
     <!-- Add data into UI Component -->
     <type name="Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider">
         <plugin name="smile_retailer_offer_inventory_add_data" type="Smile\RetailerOfferInventory\Plugin\OfferEditFormPlugin" />

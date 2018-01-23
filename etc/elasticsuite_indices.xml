@@ -15,13 +15,10 @@
 
     <index identifier="catalog_product" defaultSearchType="product">
         <type name="product" idFieldName="entity_id">
-            <datasources>
-                <datasource name="offers">Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData</datasource>
-            </datasources>
-
             <mapping>
                 <!-- Static fields handled by the "offers" datasource -->
                 <field name="offer.is_in_stock" type="boolean" nestedPath="offer" />
+                <field name="offer.qty" type="integer" nestedPath="offer" />
             </mapping>
         </type>
     </index>
