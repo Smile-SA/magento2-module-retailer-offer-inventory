@@ -16,10 +16,6 @@
     <preference for="Smile\RetailerOffer\Api\CollectionFilterInterface" type="Smile\RetailerOfferInventory\Model\CollectionFilter"/>
 
     <!-- PLUGIN -->
-    <type name="Magento\Catalog\Helper\Product">
-        <plugin name="initProductAvailableByOffer" type="Smile\RetailerOfferInventory\Plugin\HelperProductPlugin"/>
-    </type>
-
     <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
         <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
     </type>
