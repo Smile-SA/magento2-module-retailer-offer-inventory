@@ -86,7 +86,7 @@ class CollectionFilter implements \Smile\RetailerOffer\Api\CollectionFilterInter
             $filterConfig = ['field' => 'offer.seller_id', 'value' => $retailerId];
             $mustClause   = ['must' => [$this->queryFactory->create(QueryInterface::TYPE_TERM, $filterConfig)]];
 
-            if (false === $this->isEnabledShowOutOfStock()) {
+            if (false === $this->settingsHelper->isEnabledShowOutOfStock()) {
                 $isAvailableFilter = $this->queryFactory->create(
                     QueryInterface::TYPE_TERM,
                     ['field' => 'offer.is_available', 'value' => true]
@@ -142,18 +142,5 @@ class CollectionFilter implements \Smile\RetailerOffer\Api\CollectionFilterInter
         }
 
         return $retailer;
-    }
-
-    /**
-     * Get config value for 'display out of stock' option
-     *
-     * @return bool
-     */
-    private function isEnabledShowOutOfStock()
-    {
-        return $this->scopeConfig->isSetFlag(
-            'cataloginventory/options/show_out_of_stock',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
     }
 }
