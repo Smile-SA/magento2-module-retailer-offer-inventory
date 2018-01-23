@@ -36,8 +36,6 @@ class OfferInventoryData extends \Smile\Offer\Model\ResourceModel\Product\Indexe
             )
             ->where('o.product_id IN(?)', $productIds);
 
-        echo $select->assemble() . "\n";
-
         return $this->getConnection()->fetchAll($select);
     }
 }
