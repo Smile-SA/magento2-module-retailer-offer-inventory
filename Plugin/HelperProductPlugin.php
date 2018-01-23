@@ -57,7 +57,7 @@ class HelperProductPlugin
         $controller,
         $params = null
     ) {
-        if ($this->helper->useStoreOffers()) {
+        /*if ($this->helper->useStoreOffers()) {
             $offer      = $this->helper->getCurrentOffer($productId);
             $offerStock = $this->helper->getCurrentOfferStock($productId);
 
@@ -68,7 +68,7 @@ class HelperProductPlugin
             ) {
                 $productId = false;
             }
-        }
+        }*/
 
         return [$productId,
             $controller,

@@ -11,8 +11,6 @@
 
 namespace Smile\RetailerOfferInventory\Model\Stock\Item;
 
-use Magento\Framework\EntityManager\Operation\ExtensionInterface;
-use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResource;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
@@ -22,27 +20,37 @@ use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class SaveHandler implements ExtensionInterface
+class SaveHandler implements \Magento\Framework\EntityManager\Operation\ExtensionInterface
 {
     /**
-     * @var StockItemResource
+     * @var \Smile\RetailerOfferInventory\Model\Stock\ItemFactory
+     */
+    private $stockItemFactory;
+
+    /**
+     * @var \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item
      */
     private $stockItemResource;
 
     /**
-     * SaveHandler constructor.
-     * @param StockItemResource $stockItemResource Stock item resource
+     * ReadHandler constructor.
+     *
+     * @param \Smile\RetailerOfferInventory\Model\Stock\ItemFactory        $stockItemFactory  Stock item factory.
+     * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource Stock item resource.
      */
-    public function __construct(StockItemResource $stockItemResource)
-    {
+    public function __construct(
+        \Smile\RetailerOfferInventory\Model\Stock\ItemFactory $stockItemFactory,
+        \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource
+    ) {
+        $this->stockItemFactory  = $stockItemFactory;
         $this->stockItemResource = $stockItemResource;
     }
 
     /**
      * Perform action on relation/extension attribute
      *
-     * @param StockItemInterface|object $entity    Entity
-     * @param array                     $arguments Arguments
+     * @param \Smile\Offer\Api\Data\OfferInterface|object $entity    Entity
+     * @param array                                       $arguments Arguments
      *
      * @return object|bool
      * @SuppressWarnings("PMD.UnusedFormalParameter")
@@ -50,27 +58,18 @@ class SaveHandler implements ExtensionInterface
      */
     public function execute($entity, $arguments = [])
     {
+        $offerData = $entity->getInventory() ?? [];
 
-        $offerData = $entity->getExtensionAttributes()['offer_stock'] ?? [];
-        if (!array_key_exists($this->stockItemResource->getIdFieldName(), $offerData)) {
-            $offerData[$this->stockItemResource->getIdFieldName()] = null;
+        if (!empty($offerData)) {
+            $offerData[StockItemInterface::FIELD_OFFER_ID] = $entity->getId();
+            $stockItem = $this->stockItemFactory->create();
+            if ($entity->getExtensionAttributes()->getStockItem()) {
+                $stockItem = $entity->getExtensionAttributes()->getStockItem();
+            }
+
+            $stockItem->addData($offerData);
+            $this->stockItemResource->save($stockItem);
         }
-        $offerData['offer_id'] = $entity->getId();
-        $offerData = array_filter(
-            $offerData,
-            function ($dataKey) {
-                return in_array(
-                    $dataKey,
-                    [
-                        StockItemInterface::FIELD_OFFER_ID,
-                        StockItemInterface::FIELD_QTY,
-                        StockItemInterface::FIELD_IS_IN_STOCK,
-                    ]
-                );
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-        $this->stockItemResource->insertOnDuplicate($offerData, array_keys($offerData));
 
         return $entity;
     }

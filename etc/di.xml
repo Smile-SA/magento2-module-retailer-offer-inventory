@@ -23,16 +23,18 @@
             </argument>
         </arguments>
     </type>
+
     <type name="Magento\Framework\EntityManager\MetadataPool">
         <arguments>
             <argument name="metadata" xsi:type="array">
                 <item name="Smile\RetailerOfferInventory\Api\Data\StockItemInterface" xsi:type="array">
-                    <item name="entityTableName" xsi:type="string">smile_retailer_inventory_stock_item</item>
+                    <item name="entityTableName" xsi:type="string">smile_offer_inventory_stock_item</item>
                     <item name="identifierField" xsi:type="string">item_id</item>
                 </item>
             </argument>
         </arguments>
     </type>
+
     <type name="Magento\Framework\EntityManager\HydratorPool">
         <arguments>
             <argument name="hydrators" xsi:type="array">
@@ -41,6 +43,7 @@
             </argument>
         </arguments>
     </type>
+
     <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
         <arguments>
             <argument name="extensionActions" xsi:type="array">
@@ -58,6 +61,17 @@
             </argument>
         </arguments>
     </type>
+
+    <!-- Add data into UI Component -->
+    <type name="Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider">
+        <plugin name="smile_retailer_offer_inventory_add_data" type="Smile\RetailerOfferInventory\Plugin\OfferEditFormPlugin" />
+    </type>
+
+    <!-- Join offer inventory on collection -->
+    <type name="Smile\Offer\Model\ResourceModel\Offer\Collection">
+        <plugin name="add_inventory_field_to_offer_collection" type="Smile\RetailerOfferInventory\Plugin\OfferCollectionPlugin" />
+    </type>
+
     <!-- Rewrite -->
     <preference for="Magento\CatalogInventory\Model\ResourceModel\Stock"
                 type="Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Model\ResourceModel\Stock"/>

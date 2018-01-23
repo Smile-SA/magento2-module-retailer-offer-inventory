@@ -26,7 +26,7 @@
                     <item name="visible" xsi:type="boolean">false</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="dataScope" xsi:type="string">extension_attributes.offer_stock.offer_id</item>
+                    <item name="dataScope" xsi:type="string">inventory.offer_id</item>
                     <item name="source" xsi:type="string">offer</item>
                 </item>
             </argument>
@@ -36,7 +36,7 @@
                 <item name="config" xsi:type="array">
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataType" xsi:type="string">number</item>
-                    <item name="dataScope" xsi:type="string">extension_attributes.offer_stock.qty</item>
+                    <item name="dataScope" xsi:type="string">inventory.qty</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="label" xsi:type="string" translate="true">Quantity</item>
                     <item name="validation" xsi:type="array">
@@ -55,7 +55,7 @@
             </argument>
             <settings>
                 <label translate="true">Stock Status</label>
-                <dataScope>extension_attributes.offer_stock.is_in_stock</dataScope>
+                <dataScope>inventory.is_in_stock</dataScope>
             </settings>
             <formElements>
                 <select>

@@ -11,11 +11,6 @@
 
 namespace Smile\RetailerOfferInventory\Model\Stock\Item;
 
-use Magento\Framework\EntityManager\Operation\ExtensionInterface;
-use Smile\Offer\Model\Offer;
-use Smile\RetailerOfferInventory\Model\Stock\ItemFactory as StockItemFactory;
-use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResource;
-
 /**
  * Class ReadHandler
  *
@@ -23,37 +18,37 @@ use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemReso
  * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class ReadHandler implements ExtensionInterface
+class ReadHandler implements \Magento\Framework\EntityManager\Operation\ExtensionInterface
 {
     /**
-     * @var StockItemFactory
+     * @var \Smile\RetailerOfferInventory\Model\Stock\ItemFactory
      */
     private $stockItemFactory;
 
     /**
-     * @var StockItemResource
+     * @var \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item
      */
     private $stockItemResource;
 
     /**
      * ReadHandler constructor.
      *
-     * @param StockItemFactory  $stockItemFactory  Stock item factory.
-     * @param StockItemResource $stockItemResource Stock item resource.
+     * @param \Smile\RetailerOfferInventory\Model\Stock\ItemFactory        $stockItemFactory  Stock item factory.
+     * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource Stock item resource.
      */
     public function __construct(
-        StockItemFactory $stockItemFactory,
-        StockItemResource $stockItemResource
+        \Smile\RetailerOfferInventory\Model\Stock\ItemFactory $stockItemFactory,
+        \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource
     ) {
-        $this->stockItemFactory = $stockItemFactory;
+        $this->stockItemFactory  = $stockItemFactory;
         $this->stockItemResource = $stockItemResource;
     }
 
     /**
      * Perform action on relation/extension attribute
      *
-     * @param Offer|object $entity    Entity
-     * @param array        $arguments Arguments
+     * @param \Smile\Offer\Api\Data\OfferInterface|object $entity    Entity
+     * @param array                                       $arguments Arguments
      *
      * @return object|bool
      * @SuppressWarnings("PMD.UnusedFormalParameter")
@@ -63,9 +58,7 @@ class ReadHandler implements ExtensionInterface
     {
         $stockItem = $this->stockItemFactory->create();
         $this->stockItemResource->load($stockItem, $entity->getId(), 'offer_id');
-        $attributes = $entity->getExtensionAttributes() ?: [];
-        $attributes['offer_stock'] = $stockItem->getData();
-        $entity->setExtensionAttributes($attributes);
+        $entity->getExtensionAttributes()->setStockItem($stockItem);
 
         return $entity;
     }

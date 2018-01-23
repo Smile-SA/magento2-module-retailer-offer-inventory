@@ -20,7 +20,7 @@ namespace Smile\RetailerOfferInventory\Api\Data;
  */
 interface StockItemInterface
 {
-    const TABLE_NAME         = 'smile_retailer_inventory_stock_item';
+    const TABLE_NAME         = 'smile_offer_inventory_stock_item';
     const FIELD_ID           = 'item_id';
     const FIELD_OFFER_ID     = 'offer_id';
     const FIELD_QTY          = 'qty';
