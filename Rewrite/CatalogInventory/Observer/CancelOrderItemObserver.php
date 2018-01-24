@@ -54,9 +54,9 @@ class CancelOrderItemObserver extends \Magento\CatalogInventory\Observer\CancelO
     public function execute(EventObserver $observer)
     {
         /** @var \Magento\Sales\Model\Order\Item $item */
-        $item = $observer->getEvent()->getItem();
+        $item     = $observer->getEvent()->getItem();
         $children = $item->getChildrenItems();
-        $qty = $item->getQtyOrdered() - max($item->getQtyShipped(), $item->getQtyInvoiced()) - $item->getQtyCanceled();
+        $qty      = $item->getQtyOrdered() - max($item->getQtyShipped(), $item->getQtyInvoiced()) - $item->getQtyCanceled();
         if ($item->getId() && $item->getProductId() && empty($children) && $qty) {
             $this->stockManagement->backItemQty($item, $qty);
         }

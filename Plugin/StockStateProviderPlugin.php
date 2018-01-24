@@ -13,7 +13,6 @@ namespace Smile\RetailerOfferInventory\Plugin;
 
 use Magento\CatalogInventory\Model\StockStateProvider;
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
-use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
 
 /**
  * Class StockStateProviderPlugin
@@ -25,20 +24,23 @@ use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
 class StockStateProviderPlugin
 {
     /**
-     * @var OfferStockHelper
+     * @var \Smile\RetailerOffer\Helper\Settings
      */
-    private $helper;
+    private $settingsHelper;
 
     /**
-     * HelperProductPlugin constructor.
+     * StockItemPlugin constructor.
      *
-     * @param OfferStockHelper $offerStockHelper The Offer stock helper
+     * @param \Smile\RetailerOffer\Helper\Settings $settingsHelper Settings Helper
+     *
+     * @internal param \Smile\RetailerOfferInventory\Plugin\OfferStockHelper $offerStockHelper The Offer stock helper
      */
     public function __construct(
-        OfferStockHelper $offerStockHelper
+        \Smile\RetailerOffer\Helper\Settings $settingsHelper
     ) {
-        $this->helper = $offerStockHelper;
+        $this->settingsHelper = $settingsHelper;
     }
+
 
     /**
      * Check quantity
@@ -56,7 +58,7 @@ class StockStateProviderPlugin
         StockItemInterface $stockItem,
         $qty
     ) {
-        if ($this->helper->useStoreOffers()) {
+        if ($this->settingsHelper->useStoreOffers()) {
             if ($stockItem->getQty() - $qty < 0) {
                 $stockItem->setManageStock(false);
             }

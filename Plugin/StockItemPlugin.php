@@ -11,9 +11,6 @@
 
 namespace Smile\RetailerOfferInventory\Plugin;
 
-use Magento\CatalogInventory\Model\Stock\Item;
-use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
-
 /**
  * Class StockItemPlugin
  *
@@ -24,37 +21,47 @@ use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
 class StockItemPlugin
 {
     /**
-     * @var OfferStockHelper
+     * @var \Smile\RetailerOffer\Helper\Settings
+     */
+    private $settingsHelper;
+
+    /**
+     * @var \Smile\RetailerOfferInventory\Helper\OfferInventory
      */
     private $helper;
 
     /**
      * StockItemPlugin constructor.
      *
-     * @param OfferStockHelper $offerStockHelper The Offer stock helper
+     * @param \Smile\RetailerOffer\Helper\Settings                $settingsHelper       Settings Helper
+     * @param \Smile\RetailerOfferInventory\Helper\OfferInventory $offerInventoryHelper Offer Inventory Helper
+     *
+     * @internal param \Smile\RetailerOfferInventory\Plugin\OfferStockHelper $offerStockHelper The Offer stock helper
      */
     public function __construct(
-        OfferStockHelper $offerStockHelper
+        \Smile\RetailerOffer\Helper\Settings $settingsHelper,
+        \Smile\RetailerOfferInventory\Helper\OfferInventory $offerInventoryHelper
     ) {
-        $this->helper = $offerStockHelper;
+        $this->settingsHelper = $settingsHelper;
+        $this->helper         = $offerInventoryHelper;
     }
 
     /**
      * Return offer availability (if any) instead of the product one.
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) We do not need to call the parent method.
      *
-     * @param Item $item   The item
-     * @param Item $result Result
+     * @param \Magento\CatalogInventory\Model\Stock\Item $item   The item
+     * @param boolean                                    $result Result
      *
-     * @return Item
+     * @return \Magento\CatalogInventory\Model\Stock\Item
      * @throws \Exception
      */
-    public function afterSetIsInStock(Item $item, $result)
+    public function afterSetIsInStock(\Magento\CatalogInventory\Model\Stock\Item $item, $result)
     {
-        if ($this->helper->useStoreOffers()) {
-            $offerStock  = $this->helper->getCurrentOfferStock($item->getProductId());
+        if ($this->settingsHelper->useStoreOffers()) {
+            $offerStock = $this->helper->getCurrentOfferStock($item->getProductId());
             if ($offerStock !== null && $offerStock->getIsInStock() === 0) {
-                return $this->setData(Item::IS_IN_STOCK, $offerStock->getIsInStock());
+                return $this->setData(\Magento\CatalogInventory\Model\Stock\Item::IS_IN_STOCK, $offerStock->getIsInStock());
             }
         }
 

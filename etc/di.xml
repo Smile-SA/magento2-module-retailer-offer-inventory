@@ -84,7 +84,9 @@
         <plugin name="add_inventory_field_to_offer_collection" type="Smile\RetailerOfferInventory\Plugin\OfferCollectionPlugin" />
     </type>
 
-    <!-- Rewrite -->
-    <preference for="Magento\CatalogInventory\Model\ResourceModel\Stock"
-                type="Smile\RetailerOfferInventory\Rewrite\CatalogInventory\Model\ResourceModel\Stock"/>
+    <!-- Decrement offer inventory qty on sale -->
+    <type name="\Magento\CatalogInventory\Model\ResourceModel\Stock">
+        <plugin name="correct_item_qty_on_offer_inventory" type="Smile\RetailerOfferInventory\Plugin\StockResourcePlugin"/>
+    </type>
+
 </config>

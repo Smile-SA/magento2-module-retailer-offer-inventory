@@ -25,19 +25,29 @@ use Magento\CatalogInventory\Api\Data\StockItemInterface;
 class StockRegistryStoragePlugin
 {
     /**
-     * @var OfferStockHelper
+     * @var \Smile\RetailerOffer\Helper\Settings
+     */
+    private $settingsHelper;
+
+    /**
+     * @var \Smile\RetailerOfferInventory\Helper\OfferInventory
      */
     private $helper;
 
     /**
-     * ProductPlugin constructor.
+     * StockItemPlugin constructor.
      *
-     * @param OfferStockHelper $offerStockHelper The Offer stock helper
+     * @param \Smile\RetailerOffer\Helper\Settings                $settingsHelper       Settings Helper
+     * @param \Smile\RetailerOfferInventory\Helper\OfferInventory $offerInventoryHelper Offer Inventory Helper
+     *
+     * @internal param \Smile\RetailerOfferInventory\Plugin\OfferStockHelper $offerStockHelper The Offer stock helper
      */
     public function __construct(
-        OfferStockHelper $offerStockHelper
+        \Smile\RetailerOffer\Helper\Settings $settingsHelper,
+        \Smile\RetailerOfferInventory\Helper\OfferInventory $offerInventoryHelper
     ) {
-        $this->helper = $offerStockHelper;
+        $this->settingsHelper = $settingsHelper;
+        $this->helper         = $offerInventoryHelper;
     }
 
     /**
@@ -58,7 +68,7 @@ class StockRegistryStoragePlugin
         $scopeId,
         StockItemInterface $value
     ) {
-        if ($this->helper->useStoreOffers()) {
+        if ($this->settingsHelper->useStoreOffers()) {
             $offerStock  = $this->helper->getCurrentOfferStock($productId);
             if ($offerStock !== null && $offerStock->getIsInStock()) {
                 $value->setIsInStock($offerStock->getIsInStock());
@@ -69,9 +79,6 @@ class StockRegistryStoragePlugin
             }
         }
 
-        return [$productId,
-            $scopeId,
-            $value,
-        ];
+        return [$productId, $scopeId, $value];
     }
 }

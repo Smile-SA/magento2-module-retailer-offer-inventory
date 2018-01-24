@@ -10,9 +10,7 @@
  */
 namespace Smile\RetailerOfferInventory\Model;
 
-use Smile\RetailerOfferInventory\Helper\OfferStock as OfferStockHelper;
 use Smile\RetailerOfferInventory\Api\StockManagementInterface;
-use Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface;
 
 /**
  * Class OfferStockManagement
@@ -24,25 +22,25 @@ use Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface;
 class StockManagement implements StockManagementInterface
 {
     /**
-     * @var OfferStockHelper
+     * @var \Smile\RetailerOffer\Helper\Offer
      */
     private $helper;
 
     /**
-     * @var StockItemRepositoryInterface
+     * @var \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface
      */
-    private $modelRepository;
+    private $stockItemRepository;
 
     /**
-     * @param OfferStockHelper             $offerStockHelper Offer stock helper
-     * @param StockItemRepositoryInterface $modelRepository  Model repository
+     * @param \Smile\RetailerOffer\Helper\Offer                              $offerHelper         Offer stock helper
+     * @param \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface $stockItemRepository Model repository
      */
     public function __construct(
-        OfferStockHelper $offerStockHelper,
-        StockItemRepositoryInterface $modelRepository
+        \Smile\RetailerOffer\Helper\Offer $offerHelper,
+        \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface $stockItemRepository
     ) {
-        $this->helper          = $offerStockHelper;
-        $this->modelRepository = $modelRepository;
+        $this->helper              = $offerHelper;
+        $this->stockItemRepository = $stockItemRepository;
     }
 
     /**
@@ -57,16 +55,19 @@ class StockManagement implements StockManagementInterface
     public function backItemQty($orderItem, $qty)
     {
         $sellerId = $orderItem->getOrder()->getSellerId();
-        $productId = $orderItem->getProductId();
-        $offerStock = $this->helper->getOfferStock($productId, $sellerId);
+        if ($sellerId) {
+            $product = $orderItem->getProduct();
+            $offer   = $this->helper->getOffer($product, $sellerId);
 
-        if ($offerStock !== null) {
-            $offerStock->setQty($offerStock->getQty() + $qty);
+            if ($offer->getExtensionAttributes()->getStockItem() !== null) {
+                $stockItem = $offer->getExtensionAttributes()->getStockItem();
+                $stockItem->setQty($stockItem->getQty() + $qty);
 
-            if ($offerStock->getQty() > 0) {
-                $offerStock->setIsInStock(true);
+                if ($stockItem->getQty() > 0) {
+                    $stockItem->setIsInStock(true);
+                }
+                $this->stockItemRepository->save($stockItem);
             }
-            $this->modelRepository->save($offerStock);
         }
 
         return true;
