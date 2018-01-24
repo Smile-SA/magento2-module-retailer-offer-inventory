@@ -22,6 +22,8 @@
                   reference_field="offer_id"
                   join_on_field="offer_id"
             >
+                <field>item_id</field>
+                <field>offer_id</field>
                 <field>qty</field>
                 <field>is_in_stock</field>
             </join>
