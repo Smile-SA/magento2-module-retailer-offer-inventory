@@ -89,4 +89,8 @@
         <plugin name="correct_item_qty_on_offer_inventory" type="Smile\RetailerOfferInventory\Plugin\StockResourcePlugin"/>
     </type>
 
+    <!-- Back Item Qty to offer when canceling an order -->
+    <type name="\Magento\CatalogInventory\Observer\CancelOrderItemObserver">
+        <plugin name="back_item_qty_on_order_cancel" type="Smile\RetailerOfferInventory\Plugin\CancelOrderItemObserverPlugin"/>
+    </type>
 </config>
