@@ -108,7 +108,7 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
         $product = $this->productFactory->create()->setId($productId);
         $offer   = $this->offerHelper->getCurrentOffer($product);
 
-        if ($offer->getProductId() && $offer->getSellerId()) {
+        if ($offer && $offer->getProductId() && $offer->getSellerId()) {
             return $this->getOfferStock($offer->getProductId(), $offer->getSellerId());
         }
 
