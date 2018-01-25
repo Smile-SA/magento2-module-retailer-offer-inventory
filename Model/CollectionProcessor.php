@@ -22,7 +22,7 @@ use Smile\ElasticsuiteCore\Search\Request\QueryInterface;
  * @package  Smile\RetailerOfferInventory
  * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
-class CollectionFilter implements \Smile\RetailerOffer\Api\CollectionFilterInterface
+class CollectionProcessor implements \Smile\RetailerOffer\Api\CollectionProcessorInterface
 {
     /**
      * @var \Smile\RetailerOffer\Helper\Offer
@@ -111,6 +111,21 @@ class CollectionFilter implements \Smile\RetailerOffer\Api\CollectionFilterInter
             );
 
             $collection->addQueryFilter($nestedFilter);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyStoreSortOrders(\Smile\ElasticsuiteCatalog\Model\ResourceModel\Product\Fulltext\Collection $collection)
+    {
+        if (!$this->settingsHelper->isDriveMode()) {
+            return;
+        }
+
+        $retailerId = $this->getRetailerId();
+        if ($retailerId) {
+            $collection->addSortFilterParameters('price', 'offer.price', 'offer', ['offer.seller_id' => $retailerId]);
         }
     }
 
