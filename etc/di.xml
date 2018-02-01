@@ -17,6 +17,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Smile\RetailerOfferInventory\Api\Data\StockItemInterface" type="Smile\RetailerOfferInventory\Model\Stock\Item" />
+    <preference for="Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface" type="Magento\Framework\Api\SearchResults" />
     <preference for="Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface" type="Smile\RetailerOfferInventory\Model\StockItemRepository" />
     <preference for="Smile\RetailerOfferInventory\Api\StockManagementInterface" type="Smile\RetailerOfferInventory\Model\StockManagement" />
 
