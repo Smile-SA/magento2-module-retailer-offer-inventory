@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module RetailerOfferInventory Webapi REST Dependency Injection
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future.
+ *
+ * @category  Smile
+ * @package   Smile\RetailerOfferInventory
+ * @author    Maxime LECLERCQ <maxime.leclercq@smile.fr>
+ * @copyright 2018 Smile
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Custom CollectionFilter to ensure inventory data is properly filtered on -->
+    <preference for="Smile\RetailerOffer\Api\CollectionProcessorInterface" type="Smile\RetailerOfferInventory\Model\CollectionProcessor"/>
+
+    <!-- PLUGIN -->
+    <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
+        <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\Stock\Item">
+        <plugin name="setOfferStockStatus" type="Smile\RetailerOfferInventory\Plugin\StockItemPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="checkQtyOffer" type="Smile\RetailerOfferInventory\Plugin\StockStateProviderPlugin"/>
+    </type>
+
+    <!-- Compute isAvailable for offers if the offer is in stock -->
+    <type name="Smile\Offer\Api\Data\OfferInterface">
+        <plugin name="compute_is_available_with_stock" type="Smile\RetailerOfferInventory\Plugin\OfferPlugin" />
+    </type>
+</config>
