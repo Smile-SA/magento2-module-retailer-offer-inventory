@@ -36,6 +36,13 @@ class OfferInventoryData extends \Smile\Offer\Model\ResourceModel\Product\Indexe
             )
             ->where('o.product_id IN(?)', $productIds);
 
-        return $this->getConnection()->fetchAll($select);
+        $offerData = $this->getConnection()->fetchAll($select);
+        array_walk($offerData, function (&$offer) {
+            $offer['is_in_stock'] = (bool) $offer['is_in_stock'];
+
+            return $offer;
+        });
+
+        return $offerData;
     }
 }
