@@ -29,3 +29,4 @@ The module requires :
 Go to magento backoffice
 
 Menu : Sellers > Retailer Offers
+   Add a stock level for the current offer.
