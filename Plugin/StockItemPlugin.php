@@ -61,7 +61,7 @@ class StockItemPlugin
         if ($this->settingsHelper->useStoreOffers()) {
             $offerStock = $this->helper->getCurrentOfferStock($item->getProductId());
             if ($offerStock !== null && $offerStock->getIsInStock() === 0) {
-                return $this->setData(\Magento\CatalogInventory\Model\Stock\Item::IS_IN_STOCK, $offerStock->getIsInStock());
+                return $item->setData(\Magento\CatalogInventory\Model\Stock\Item::IS_IN_STOCK, $offerStock->getIsInStock());
             }
         }
 
