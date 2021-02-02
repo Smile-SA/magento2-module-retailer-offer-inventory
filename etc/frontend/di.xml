@@ -16,10 +16,6 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
-    <!-- Custom CollectionFilter to ensure inventory data is properly filtered on -->
-    <preference for="Smile\RetailerOffer\Api\CollectionProcessorInterface" type="Smile\RetailerOfferInventory\Model\CollectionProcessor"/>
-
     <!-- PLUGIN -->
     <type name="Magento\CatalogInventory\Model\StockRegistryStorage">
         <plugin name="addOfferStockData" type="Smile\RetailerOfferInventory\Plugin\StockRegistryStoragePlugin"/>
