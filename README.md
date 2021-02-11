@@ -8,7 +8,7 @@ This module add the ability to manage offers inventory per Retailer Shop.
 
 The module requires :
 
-- [Retailer offer](https://github.com/Smile-SA/magento2-module-retailer-offer) > 1.3.*
+- [Retailer offer](https://github.com/Smile-SA/magento2-module-retailer-offer) > 1.7.*
 
 ### How to use
 
