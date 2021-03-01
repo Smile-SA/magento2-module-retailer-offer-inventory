@@ -68,6 +68,14 @@
         </arguments>
     </type>
 
+    <type name="Smile\RetailerOffer\Model\Product\Search\Request\Container\Filter\CurrentStore">
+        <arguments>
+            <argument name="retailerStockFilters" xsi:type="array">
+                <item name="offer_in_stock" xsi:type="object">Smile\RetailerOfferInventory\Model\Product\Search\Request\Container\Filter\OfferIsInStock</item>
+            </argument>
+        </arguments>
+    </type>
+
     <!-- Inject another Resource Model for indexing -->
     <type name="\Smile\Offer\Model\Product\Indexer\Fulltext\Datasource\OfferData">
         <arguments>
