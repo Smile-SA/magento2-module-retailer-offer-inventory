@@ -13,7 +13,7 @@
     "magento/framework": "*",
     "magento/module-store": "*",
     "magento/module-checkout": "*",
-    "smile/module-retailer-offer": "~1.7.0"
+    "smile/module-retailer-offer": "~1.7"
   },
   "require-dev": {
     "smile/magento2-smilelab-quality-suite": "^1.0.5"
