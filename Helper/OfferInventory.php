@@ -1,42 +1,33 @@
 <?php
+
 /**
  * Helper
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Helper;
 
+use Magento\Catalog\Api\Data\ProductInterfaceFactory;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
 use Smile\Offer\Api\Data\OfferInterface;
+use Smile\RetailerOffer\Helper\Offer;
+use Smile\RetailerOffer\Helper\Settings;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Generic Helper for Retailer OfferInventory
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
+class OfferInventory extends AbstractHelper
 {
-    /**
-     * @var \Smile\RetailerOffer\Helper\Settings
-     */
-    private $settingsHelper;
-
-    /**
-     * @var \Smile\RetailerOffer\Helper\Offer
-     */
-    private $offerHelper;
-
-    /**
-     * @var \Magento\Catalog\Api\Data\ProductInterfaceFactory
-     */
-    private $productFactory;
-
     /**
      * ProductPlugin constructor.
      *
@@ -46,14 +37,11 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory $productFactory Product Factory
      */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Smile\RetailerOffer\Helper\Settings $settingsHelper,
-        \Smile\RetailerOffer\Helper\Offer $offerHelper,
-        \Magento\Catalog\Api\Data\ProductInterfaceFactory $productFactory
+        Context $context,
+        private Settings $settingsHelper,
+        private Offer $offerHelper,
+        private ProductInterfaceFactory $productFactory
     ) {
-        $this->settingsHelper = $settingsHelper;
-        $this->offerHelper    = $offerHelper;
-        $this->productFactory = $productFactory;
 
         parent::__construct($context);
     }
@@ -61,12 +49,10 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Retrieve Offer for the product by retailer id and pickup date.
      *
-     * @param integer $productId  The product
-     * @param integer $retailerId The retailer Id
-     *
-     * @return OfferInterface
+     * @param int $productId  The product
+     * @param int $retailerId The retailer Id
      */
-    public function getOffer($productId, $retailerId)
+    public function getOffer(int $productId, int $retailerId): OfferInterface
     {
         $product = $this->productFactory->create()->setId($productId);
 
@@ -76,14 +62,12 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Retrieve Offer for the product by retailer id.
      *
-     * @param integer $productId  The product
-     * @param integer $retailerId The retailer Id
-     *
-     * @return StockItemInterface
+     * @param int $productId  The product
+     * @param int $retailerId The retailer Id
      * @throws \Exception
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getOfferStock($productId, $retailerId)
+    public function getOfferStock(int $productId, int $retailerId): StockItemInterface
     {
         $offerStock = null;
 
@@ -99,11 +83,9 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
      * Retrieve Current Offer stock for the product.
      *
      * @param int $productId Product id.
-     *
-     * @return StockItemInterface
      * @throws \Exception
      */
-    public function getCurrentOfferStock($productId)
+    public function getCurrentOfferStock(int $productId): ?StockItemInterface
     {
         $product = $this->productFactory->create()->setId($productId);
         $offer   = $this->offerHelper->getCurrentOffer($product);
@@ -119,11 +101,9 @@ class OfferInventory extends \Magento\Framework\App\Helper\AbstractHelper
      * Retrieve Current Offer for the product.
      *
      * @param int $productId Product id.
-     *
-     * @return OfferInterface
      * @throws \Exception
      */
-    public function getCurrentOffer($productId)
+    public function getCurrentOffer(int $productId): OfferInterface
     {
         $product = $this->productFactory->create()->setId($productId);
         $offer   = $this->offerHelper->getCurrentOffer($product);

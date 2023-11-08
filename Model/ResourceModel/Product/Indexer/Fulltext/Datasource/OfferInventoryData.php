@@ -1,31 +1,32 @@
 <?php
+
 /**
  * ResourceModel Product Indexer Fulltext
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model\ResourceModel\Product\Indexer\Fulltext\Datasource;
 
+use Smile\Offer\Model\ResourceModel\Product\Indexer\Fulltext\Datasource\OfferData;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Class StockData
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
-class OfferInventoryData extends \Smile\Offer\Model\ResourceModel\Product\Indexer\Fulltext\Datasource\OfferData
+class OfferInventoryData extends OfferData
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function loadOfferData($productIds)
+    public function loadOfferData($productIds): array
     {
         $select = $this->getConnection()->select()
             ->from(['o' => $this->getTable('smile_offer')])

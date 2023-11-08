@@ -19,6 +19,8 @@
 <module name="Smile_RetailerOfferInventory" setup_version="1.0.0">
     <sequence>
         <module name="Smile_RetailerOffer" />
+        <module name="Magento_InventoryCatalog"/>
+        <module name="Magento_InventorySales"/>
     </sequence>
 </module>
 </config>

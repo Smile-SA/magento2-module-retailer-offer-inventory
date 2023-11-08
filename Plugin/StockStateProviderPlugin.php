@@ -1,46 +1,39 @@
 <?php
+
 /**
  * Plugin StockStateProviderPlugin
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Plugin;
 
-use Magento\CatalogInventory\Model\StockStateProvider;
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
+use Magento\CatalogInventory\Model\StockStateProvider;
+use Smile\RetailerOffer\Helper\Settings;
 
 /**
- * Class StockStateProviderPlugin
+ * StockStateProviderPlugin class on \Magento\CatalogInventory\Model\StockStateProvider
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class StockStateProviderPlugin
 {
     /**
-     * @var \Smile\RetailerOffer\Helper\Settings
-     */
-    private $settingsHelper;
-
-    /**
      * StockItemPlugin constructor.
      *
      * @param \Smile\RetailerOffer\Helper\Settings $settingsHelper Settings Helper
-     *
      * @internal param \Smile\RetailerOfferInventory\Plugin\OfferStockHelper $offerStockHelper The Offer stock helper
      */
     public function __construct(
-        \Smile\RetailerOffer\Helper\Settings $settingsHelper
+        private Settings $settingsHelper
     ) {
-        $this->settingsHelper = $settingsHelper;
     }
-
 
     /**
      * Check quantity
@@ -48,7 +41,6 @@ class StockStateProviderPlugin
      * @param StockStateProvider $stockState Stock state
      * @param StockItemInterface $stockItem  Stock item
      * @param int|float          $qty        Quantity
-     *
      * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @throws \Exception
@@ -56,8 +48,8 @@ class StockStateProviderPlugin
     public function beforeCheckQty(
         StockStateProvider $stockState,
         StockItemInterface $stockItem,
-        $qty
-    ) {
+        int|float $qty
+    ): array {
         if ($this->settingsHelper->useStoreOffers()) {
             if ($stockItem->getQty() - $qty < 0) {
                 $stockItem->setManageStock(false);

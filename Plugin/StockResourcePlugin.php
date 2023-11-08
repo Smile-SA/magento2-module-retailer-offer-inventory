@@ -1,49 +1,44 @@
 <?php
+
 /**
  * DISCLAIMER
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future.
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Romain Ruaud <romain.ruaud@smile.fr>
  * @copyright 2017 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Plugin;
+
+use Closure;
+use Smile\RetailerOffer\Helper\Settings;
+use Smile\RetailerOfferInventory\Model\ResourceModel\Stock;
 
 /**
  * Plugin on Stock Resource Model.
  * Used to decrement offer inventory instead of Web one.
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class StockResourcePlugin
 {
-    /**
-     * @var \Smile\RetailerOffer\Helper\Settings
-     */
-    private $settingsHelper;
-
-    /**
-     * @var \Smile\RetailerOfferInventory\Helper\OfferInventory
-     */
-    private $offerInventoryResource;
+    private Stock $offerInventoryResource;
 
     /**
      * StockItemPlugin constructor.
      *
      * @param \Smile\RetailerOffer\Helper\Settings                    $settingsHelper         Settings Helper
      * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock $offerInventoryResource Offer Inventory
-     *
      */
     public function __construct(
-        \Smile\RetailerOffer\Helper\Settings $settingsHelper,
-        \Smile\RetailerOfferInventory\Model\ResourceModel\Stock $offerInventoryResource
+        private Settings $settingsHelper,
+        Stock $offerInventoryResource
     ) {
-        $this->settingsHelper         = $settingsHelper;
         $this->offerInventoryResource = $offerInventoryResource;
     }
 
@@ -51,7 +46,6 @@ class StockResourcePlugin
      * Compute item qty correction with Offer Inventory Resource if needed.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     *
      * @param \Magento\CatalogInventory\Model\ResourceModel\Stock $stockResource Stock Item Resource Model
      * @param \Closure                                            $proceed       correctItemsQty() method
      * @param array                                               $items         Items being corrected
@@ -60,17 +54,11 @@ class StockResourcePlugin
      */
     public function aroundCorrectItemsQty(
         \Magento\CatalogInventory\Model\ResourceModel\Stock $stockResource,
-        \Closure $proceed,
+        Closure $proceed,
         array $items,
-        $websiteId,
-        $operator
-    ) {
-        if (!$this->settingsHelper->useStoreOffers()) {
-            $proceed($items, $websiteId, $operator);
-
-            return;
-        }
-
+        int $websiteId,
+        string $operator
+    ): void {
         $this->offerInventoryResource->correctItemsQty($items, $operator);
     }
 }

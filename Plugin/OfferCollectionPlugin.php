@@ -1,64 +1,60 @@
 <?php
+
 /**
  * DISCLAIMER
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future.
  *
- * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Romain Ruaud <romain.ruaud@smile.fr>
  * @copyright 2017 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Plugin;
 
+use Closure;
 use Magento\Framework\Api\ExtensibleDataInterface;
+use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
+use Magento\Framework\Profiler;
+use Smile\Offer\Model\ResourceModel\Offer\Collection;
 
 /**
  * Offer Collection Plugin.
  * Used to compute inventory data with a join.
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class OfferCollectionPlugin
 {
     /**
-     * @var \Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface
-     */
-    private $joinProcessor;
-
-    /**
      * Constructor.
      *
-     * @param \Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface $joinProcessor Extension Attribute Join Processor
+     * @param JoinProcessorInterface $joinProcessor Extension Attribute Join Processor
      */
-    public function __construct(\Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface $joinProcessor)
+    public function __construct(private JoinProcessorInterface $joinProcessor)
     {
-        $this->joinProcessor = $joinProcessor;
     }
 
     /**
      * Append inventory loading to the offer collection.
+     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      * @SuppressWarnings(PHPMD.StaticAccess)
-     *
-     * @param \Smile\Offer\Model\ResourceModel\Offer\Collection $collection Collection loaded.
+     * @param Collection $collection Collection loaded.
      * @param \Closure                                          $proceed    Original method.
      * @param bool                                              $printQuery Print queries used to load the collection.
      * @param bool                                              $logQuery   Log queries used to load the collection.
-     *
-     * @return \Smile\Retailer\Model\ResourceModel\Retailer\Collection
      */
     public function aroundLoad(
-        \Smile\Offer\Model\ResourceModel\Offer\Collection $collection,
-        \Closure $proceed,
-        $printQuery = false,
-        $logQuery = false
-    ) {
+        Collection $collection,
+        Closure $proceed,
+        bool $printQuery = false,
+        bool $logQuery = false
+    ): \Smile\Retailer\Model\ResourceModel\Retailer\Collection|Collection {
         if (!$collection->isLoaded()) {
-            \Magento\Framework\Profiler::start('SmileRetailerOffer:INVENTORY_DATA');
+            Profiler::start('SmileRetailerOffer:INVENTORY_DATA');
 
             // Process joining for Address : defined via extension_attributes.xml file.
             $this->joinProcessor->process($collection);
@@ -73,7 +69,7 @@ class OfferCollectionPlugin
                     $currentItem->setExtensionAttributes($data[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY]);
                 }
             }
-            \Magento\Framework\Profiler::stop('SmileRetailerOffer:INVENTORY_DATA');
+            Profiler::stop('SmileRetailerOffer:INVENTORY_DATA');
         }
 
         return $collection;

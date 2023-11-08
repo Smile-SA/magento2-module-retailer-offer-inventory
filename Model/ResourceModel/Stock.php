@@ -1,33 +1,32 @@
 <?php
+
 /**
  * DISCLAIMER
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future.
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Romain Ruaud <romain.ruaud@smile.fr>
  * @copyright 2017 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Context;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
+use Smile\RetailerOfferInventory\Helper\OfferInventory;
 
 /**
  * Stock Resource Model
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
-class Stock extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Stock extends AbstractDb
 {
-    /**
-     * @var \Smile\RetailerOfferInventory\Helper\OfferInventory
-     */
-    private $helper;
-
     /**
      * Stock constructor.
      *
@@ -36,11 +35,10 @@ class Stock extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param null                                                $connectionName Connection name
      */
     public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        \Smile\RetailerOfferInventory\Helper\OfferInventory $helper,
+        Context   $context,
+        private OfferInventory $helper,
         $connectionName = null
     ) {
-        $this->helper = $helper;
         parent::__construct($context, $connectionName);
     }
 
@@ -49,10 +47,8 @@ class Stock extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @param int[]  $items    The items to correct
      * @param string $operator +/-
-     *
-     * @return void
      */
-    public function correctItemsQty(array $items, $operator)
+    public function correctItemsQty(array $items, string $operator): void
     {
         $connection = $this->getConnection();
         $conditions = $outOfStock = $offerIds = [];
@@ -96,7 +92,7 @@ class Stock extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(
             StockItemInterface::TABLE_NAME,
