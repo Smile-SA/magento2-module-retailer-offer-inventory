@@ -1,24 +1,27 @@
 <?php
+
 /**
  * DISCLAIMER
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future.
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Romain Ruaud <romain.ruaud@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Plugin;
 
+use Closure;
 use Smile\Offer\Api\Data\OfferInterface;
+use Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider;
 
 /**
  * Offer form data provider plugin.
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class OfferEditFormPlugin
@@ -28,10 +31,9 @@ class OfferEditFormPlugin
      *
      * @param \Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider $dataProvider DataProvider.
      * @param \Closure                                                  $proceed      Original method.
-     *
      * @return array
      */
-    public function aroundGetData(\Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider $dataProvider, \Closure $proceed)
+    public function aroundGetData(DataProvider $dataProvider, Closure $proceed): array
     {
         $data  = $proceed();
         $offer = $this->getOffer($dataProvider);
@@ -48,10 +50,9 @@ class OfferEditFormPlugin
      * Return the currently edited offer.
      *
      * @param \Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider $dataProvider DataProvider.
-     *
-     * @return NULL|\Smile\Offer\Api\Data\OfferInterface
+     * @return \Smile\Offer\Api\Data\OfferInterface|NULL
      */
-    private function getOffer(\Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider $dataProvider)
+    private function getOffer(DataProvider $dataProvider): ?OfferInterface
     {
         $offer = $dataProvider->getCollection()->getFirstItem();
 

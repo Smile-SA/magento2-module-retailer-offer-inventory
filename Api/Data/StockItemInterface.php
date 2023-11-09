@@ -1,30 +1,30 @@
 <?php
+
 /**
  * Api data
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
 
 namespace Smile\RetailerOfferInventory\Api\Data;
 
 /**
  * Interface StockItemInterface
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 interface StockItemInterface
 {
-    const TABLE_NAME         = 'smile_offer_inventory_stock_item';
-    const FIELD_ID           = 'item_id';
-    const FIELD_OFFER_ID     = 'offer_id';
-    const FIELD_QTY          = 'qty';
-    const FIELD_IS_IN_STOCK  = 'is_in_stock';
+    public const TABLE_NAME         = 'smile_offer_inventory_stock_item';
+    public const FIELD_ID           = 'item_id';
+    public const FIELD_OFFER_ID     = 'offer_id';
+    public const FIELD_QTY          = 'qty';
+    public const FIELD_IS_IN_STOCK  = 'is_in_stock';
 
     /**
      * Get item_id
@@ -58,35 +58,31 @@ interface StockItemInterface
      * Set field: item_id
      *
      * @param int $value Item id.
-     *
      * @return StockItemInterface
      */
-    public function setItemId($value);
+    public function setItemId(int $value);
 
     /**
      * Set field: offer_id
      *
      * @param int $value Offer id.
-     *
      * @return StockItemInterface
      */
-    public function setOfferId($value);
+    public function setOfferId(int $value);
 
     /**
      * Set field: qty
      *
      * @param int $value Quantity.
-     *
      * @return StockItemInterface
      */
-    public function setQty($value);
+    public function setQty(int $value);
 
     /**
      * Set field: is_in_stock
      *
      * @param int $value Is in stock.
-     *
      * @return StockItemInterface
      */
-    public function setIsInStock($value);
+    public function setIsInStock(int $value);
 }

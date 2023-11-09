@@ -1,46 +1,41 @@
 <?php
+
 /**
  * Model OfferStockManagement
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model;
 
+use Magento\Sales\Model\Order\Item;
+use Smile\RetailerOffer\Helper\Offer;
+use Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface;
 use Smile\RetailerOfferInventory\Api\StockManagementInterface;
 
 /**
  * Class OfferStockManagement
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class StockManagement implements StockManagementInterface
 {
-    /**
-     * @var \Smile\RetailerOffer\Helper\Offer
-     */
-    private $helper;
-
-    /**
-     * @var \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface
-     */
-    private $stockItemRepository;
+    private Offer $helper;
 
     /**
      * @param \Smile\RetailerOffer\Helper\Offer                              $offerHelper         Offer stock helper
      * @param \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface $stockItemRepository Model repository
      */
     public function __construct(
-        \Smile\RetailerOffer\Helper\Offer $offerHelper,
-        \Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface $stockItemRepository
+        Offer $offerHelper,
+        private StockItemRepositoryInterface $stockItemRepository
     ) {
         $this->helper              = $offerHelper;
-        $this->stockItemRepository = $stockItemRepository;
     }
 
     /**
@@ -48,11 +43,9 @@ class StockManagement implements StockManagementInterface
      *
      * @param \Magento\Sales\Model\Order\Item $orderItem Order item
      * @param float                           $qty       Quantity
-     *
-     * @return bool
      * @throws \Exception
      */
-    public function backItemQty($orderItem, $qty)
+    public function backItemQty(Item $orderItem, float $qty): bool
     {
         $sellerId = $orderItem->getOrder()->getSellerId();
         if ($sellerId) {

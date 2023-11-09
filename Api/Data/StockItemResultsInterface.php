@@ -1,13 +1,15 @@
 <?php
+
 /**
  * Api data
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
+
+declare(strict_types=1);
 
 namespace Smile\RetailerOfferInventory\Api\Data;
 
@@ -16,8 +18,6 @@ use Magento\Framework\Api\SearchResultsInterface;
 /**
  * Interface StockItemResultsInterface
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 interface StockItemResultsInterface extends SearchResultsInterface

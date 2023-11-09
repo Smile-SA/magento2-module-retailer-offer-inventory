@@ -1,58 +1,41 @@
 <?php
+
 /**
  * Repository StockItemRepository
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model;
 
-use Smile\RetailerOfferInventory\Api\Data;
-use Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface;
-use Smile\RetailerOfferInventory\Api\Data\StockItemInterfaceFactory;
-use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
-use Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterfaceFactory;
-use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResourceModel;
-use Magento\Framework\Phrase;
+use Exception;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface as CollectionProcessor;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Data\Collection\AbstractDb as AbstractCollection;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface as CollectionProcessor;
-use Magento\Framework\Data\Collection\AbstractDb as AbstractCollection;
+use Magento\Framework\Phrase;
+use Smile\RetailerOfferInventory\Api\Data;
+use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
+use Smile\RetailerOfferInventory\Api\Data\StockItemInterfaceFactory;
+use Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface;
+use Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterfaceFactory;
+use Smile\RetailerOfferInventory\Api\StockItemRepositoryInterface;
+use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item as StockItemResourceModel;
 
 /**
- * Class StockItemRepository
+ * StockItemRepository  model class
  *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
  * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class StockItemRepository implements StockItemRepositoryInterface
 {
-    /**
-     * @var StockItemInterfaceFactory
-     */
-    protected $objectFactory;
-
-    /**
-     * @var StockItemResourceModel
-     */
-    protected $objectResource;
-
-    /**
-     * @var StockItemResultsInterfaceFactory
-     */
-    protected $searchResultsFactory;
-
-    /**
-     * @var CollectionProcessor
-     */
-    protected $collectionProcessor;
-
     /**
      * Item constructor.
      *
@@ -62,26 +45,21 @@ class StockItemRepository implements StockItemRepositoryInterface
      * @param CollectionProcessor              $collectionProcessor  Collection Processor
      */
     public function __construct(
-        StockItemInterfaceFactory        $objectFactory,
-        StockItemResourceModel           $objectResource,
-        StockItemResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessor              $collectionProcessor
+        protected StockItemInterfaceFactory        $objectFactory,
+        protected StockItemResourceModel           $objectResource,
+        protected StockItemResultsInterfaceFactory $searchResultsFactory,
+        protected CollectionProcessor              $collectionProcessor
     ) {
-        $this->objectFactory        = $objectFactory;
-        $this->objectResource       = $objectResource;
-        $this->searchResultsFactory = $searchResultsFactory;
-        $this->collectionProcessor  = $collectionProcessor;
     }
 
     /**
      * Retrieve stock item inventory.
      *
      * @param int $itemId Item id.
-     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @SuppressWarnings("PMD.StaticAccess")
      */
-    public function getById($itemId)
+    public function getById(int $itemId): StockItemInterface
     {
         /** @var \Magento\Framework\Model\AbstractModel $object */
         $object = $this->objectFactory->create();
@@ -98,11 +76,10 @@ class StockItemRepository implements StockItemRepositoryInterface
      * Retrieve stock item inventory by offer_id.
      *
      * @param int $offerId Offer id.
-     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @SuppressWarnings("PMD.StaticAccess")
      */
-    public function getByOfferId($offerId)
+    public function getByOfferId(int $offerId): StockItemInterface
     {
         /** @var \Magento\Framework\Model\AbstractModel $object */
         $object = $this->objectFactory->create();
@@ -119,10 +96,9 @@ class StockItemRepository implements StockItemRepositoryInterface
      * Retrieve stock item inventory matching the specified criteria.
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria Search criteria.
-     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
+    public function getList(SearchCriteriaInterface $searchCriteria): StockItemResultsInterface
     {
         /** @var AbstractCollection $collection */
         $collection = $this->objectFactory->create()->getCollection();
@@ -146,15 +122,14 @@ class StockItemRepository implements StockItemRepositoryInterface
      * Save stock.
      *
      * @param \Smile\RetailerOfferInventory\Api\Data\StockItemInterface $stockItem Stock item object.
-     * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(Data\StockItemInterface $stockItem)
+    public function save(Data\StockItemInterface $stockItem): StockItemInterface
     {
         try {
             /** @var \Magento\Framework\Model\AbstractModel $stockItem */
             $this->objectResource->save($stockItem);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $msg = new Phrase($e->getMessage());
             throw new CouldNotSaveException($msg);
         }
@@ -170,7 +145,7 @@ class StockItemRepository implements StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function deleteById($itemId)
+    public function deleteById(int $itemId): bool
     {
         $stockItem = $this->getById($itemId);
 
@@ -185,7 +160,7 @@ class StockItemRepository implements StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function deleteByOfferId($offerId)
+    public function deleteByOfferId(int $offerId): bool
     {
         $stockItem = $this->getByOfferId($offerId);
 
@@ -200,12 +175,12 @@ class StockItemRepository implements StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function delete(Data\StockItemInterface $stockItem)
+    public function delete(Data\StockItemInterface $stockItem): bool
     {
         try {
             /** @var \Magento\Framework\Model\AbstractModel $stockItem */
             $this->objectResource->delete($stockItem);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $msg = new Phrase($e->getMessage());
             throw new CouldNotDeleteException($msg);
         }
