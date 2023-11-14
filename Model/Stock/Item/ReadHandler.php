@@ -19,16 +19,11 @@ use Smile\RetailerOfferInventory\Model\Stock\ItemFactory;
 
 /**
  * ReadHandler model class
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class ReadHandler implements ExtensionInterface
 {
     /**
      * ReadHandler constructor.
-     *
-     * @param \Smile\RetailerOfferInventory\Model\Stock\ItemFactory        $stockItemFactory  Stock item factory.
-     * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource Stock item resource.
      */
     public function __construct(
         private ItemFactory $stockItemFactory,
@@ -49,7 +44,9 @@ class ReadHandler implements ExtensionInterface
     {
         $stockItem = $this->stockItemFactory->create();
         $this->stockItemResource->load($stockItem, $entity->getId(), 'offer_id');
+        $stockItemData = $stockItem->getData();
         $entity->getExtensionAttributes()->setStockItem($stockItem);
+        $entity['inventory'] = $stockItemData;
 
         return $entity;
     }

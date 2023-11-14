@@ -22,31 +22,22 @@ use Smile\RetailerOfferInventory\Helper\OfferInventory;
 
 /**
  * Stock Resource Model
- *
- * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class Stock extends AbstractDb
 {
     /**
      * Stock constructor.
-     *
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context   $context        Context
-     * @param \Smile\RetailerOfferInventory\Helper\OfferInventory $helper         Helper
-     * @param null                                                $connectionName Connection name
      */
     public function __construct(
         Context   $context,
         private OfferInventory $helper,
-        $connectionName = null
+        ?string $connectionName = null
     ) {
         parent::__construct($context, $connectionName);
     }
 
     /**
      * Correct particular stock products qty based on operator
-     *
-     * @param int[]  $items    The items to correct
-     * @param string $operator +/-
      */
     public function correctItemsQty(array $items, string $operator): void
     {

@@ -83,11 +83,6 @@
         </arguments>
     </type>
 
-    <!-- Add data into UI Component -->
-    <type name="Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider">
-        <plugin name="smile_retailer_offer_inventory_add_data" type="Smile\RetailerOfferInventory\Plugin\OfferEditFormPlugin" />
-    </type>
-
     <!-- Join offer inventory on collection -->
     <type name="Smile\Offer\Model\ResourceModel\Offer\Collection">
         <plugin name="add_inventory_field_to_offer_collection" type="Smile\RetailerOfferInventory\Plugin\OfferCollectionPlugin" />

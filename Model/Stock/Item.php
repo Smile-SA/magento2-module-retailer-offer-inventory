@@ -18,9 +18,7 @@ use Magento\Framework\Model\AbstractModel;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
- * Item molde class
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
+ * Item model class
  */
 class Item extends AbstractModel implements StockItemInterface, IdentityInterface
 {
@@ -70,8 +68,6 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
 
     /**
      * Set field: item_id
-     *
-     * @param int $value Item id.
      */
     public function setItemId(int $value): StockItemInterface
     {
@@ -80,8 +76,6 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
 
     /**
      * Set field: offer_id
-     *
-     * @param int $value Offer id.
      */
     public function setOfferId(int $value): StockItemInterface
     {
@@ -90,8 +84,6 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
 
     /**
      * Set field: qty
-     *
-     * @param int $value Quantity.
      */
     public function setQty(int $value): StockItemInterface
     {
@@ -100,8 +92,6 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
 
     /**
      * Set field: is_in_stock
-     *
-     * @param int $value Is in stock.
      */
     public function setIsInStock(int $value): StockItemInterface
     {

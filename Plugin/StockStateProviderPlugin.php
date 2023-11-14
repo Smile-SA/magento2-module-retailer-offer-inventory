@@ -19,16 +19,11 @@ use Smile\RetailerOffer\Helper\Settings;
 
 /**
  * StockStateProviderPlugin class on \Magento\CatalogInventory\Model\StockStateProvider
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class StockStateProviderPlugin
 {
     /**
      * StockItemPlugin constructor.
-     *
-     * @param \Smile\RetailerOffer\Helper\Settings $settingsHelper Settings Helper
-     * @internal param \Smile\RetailerOfferInventory\Plugin\OfferStockHelper $offerStockHelper The Offer stock helper
      */
     public function __construct(
         private Settings $settingsHelper
@@ -38,10 +33,6 @@ class StockStateProviderPlugin
     /**
      * Check quantity
      *
-     * @param StockStateProvider $stockState Stock state
-     * @param StockItemInterface $stockItem  Stock item
-     * @param int|float          $qty        Quantity
-     * @return array
      * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @throws \Exception
      */

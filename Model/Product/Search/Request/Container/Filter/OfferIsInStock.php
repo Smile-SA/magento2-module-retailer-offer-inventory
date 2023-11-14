@@ -27,12 +27,10 @@ class OfferIsInStock implements FilterInterface
 {
     /**
      * OfferIsInStock constructor.
-     *
-     * @param QueryFactory $queryFactory Query Factory
      */
-    public function __construct(QueryFactory $queryFactory)
-    {
-        $this->queryFactory = $queryFactory;
+    public function __construct(
+        protected QueryFactory $queryFactory
+    ) {
     }
 
     /**

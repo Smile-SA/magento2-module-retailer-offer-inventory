@@ -24,18 +24,11 @@ use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Item resource model class
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class Item extends AbstractDb
 {
     /**
      * Class constructor
-     *
-     * @param Context       $context        Context
-     * @param EntityManager $entityManager  Entity Manager
-     * @param MetadataPool  $metadataPool   Metadata pool
-     * @param string        $connectionName Connection name
      */
     public function __construct(
         Context       $context,
@@ -66,7 +59,7 @@ class Item extends AbstractDb
      * @throws \Exception
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
-    public function load(AbstractModel $object, $value, $field = null)
+    public function load(AbstractModel $object, $value, $field = null): self
     {
         $objectId = $this->getObjectId($value, $field);
 
@@ -80,11 +73,9 @@ class Item extends AbstractDb
     /**
      * Save an object
      *
-     * @param AbstractModel $object Object
-     * @return $this
      * @throws \Exception
      */
-    public function save(AbstractModel $object)
+    public function save(AbstractModel $object): self
     {
         $this->entityManager->save($object);
 
@@ -94,11 +85,9 @@ class Item extends AbstractDb
     /**
      * Delete an object
      *
-     * @param AbstractModel $object Object
-     * @return $this
      * @throws \Exception
      */
-    public function delete(AbstractModel $object)
+    public function delete(AbstractModel $object): self
     {
         $this->entityManager->delete($object);
 
@@ -108,13 +97,10 @@ class Item extends AbstractDb
     /**
      * Insert or update lines
      *
-     * @param array $values Values
-     * @param array $fields Fields
-     * @return $this
      * @throws \Exception
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function insertOnDuplicate(array $values, array $fields)
+    public function insertOnDuplicate(array $values, array $fields): self
     {
         $this->getConnection()->insertOnDuplicate(
             $this->getMainTable(),
@@ -128,11 +114,9 @@ class Item extends AbstractDb
     /**
      * Get the id of an object with all table field
      *
-     * @param mixed $value Value
-     * @param null  $field Field
      * @throws \Exception
      */
-    protected function getObjectId(mixed $value, $field = null): bool|int|string
+    protected function getObjectId(mixed $value, ?string $field = null): bool|int|string
     {
         $entityMetadata = $this->metadataPool->getMetadata(StockItemInterface::class);
         if ($field === null) {

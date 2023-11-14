@@ -18,36 +18,25 @@ namespace Smile\RetailerOfferInventory\Plugin;
 use Closure;
 use Magento\CatalogInventory\Observer\CancelOrderItemObserver;
 use Magento\Framework\Event\Observer;
-use Smile\RetailerOffer\Helper\Settings;
 use Smile\RetailerOfferInventory\Api\StockManagementInterface;
 
 /**
  * Plugin on \Magento\CatalogInventory\Observer\CancelOrderItemObserver
- *
- * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class CancelOrderItemObserverPlugin
 {
     /**
      * CancelOrderItemObserverPlugin constructor.
-     *
-     * @param Settings $settingsHelper           Settings Helper
-     * @param StockManagementInterface $stockManagementInterface Offer inventory management
      */
     public function __construct(
-        private Settings $settingsHelper,
-        StockManagementInterface $stockManagementInterface
+        protected StockManagementInterface $stockManagement
     ) {
-        $this->stockManagement = $stockManagementInterface;
     }
 
     /**
      * Back item qty to offer inventory if needed.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * @param \Magento\CatalogInventory\Observer\CancelOrderItemObserver $subject  The observer
-     * @param \Closure                                                   $proceed  The execute Method of the Observer
-     * @param \Magento\Framework\Event\Observer                          $observer The event observer
      */
     public function aroundExecute(
         CancelOrderItemObserver $subject,

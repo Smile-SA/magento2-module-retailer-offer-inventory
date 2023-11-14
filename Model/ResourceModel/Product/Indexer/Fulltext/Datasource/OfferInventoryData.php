@@ -18,15 +18,13 @@ use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Class StockData
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class OfferInventoryData extends OfferData
 {
     /**
      * @inheritdoc
      */
-    public function loadOfferData($productIds): array
+    public function loadOfferData(array $productIds): array
     {
         $select = $this->getConnection()->select()
             ->from(['o' => $this->getTable('smile_offer')])

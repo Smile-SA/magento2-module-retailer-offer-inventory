@@ -18,16 +18,11 @@ use Smile\Offer\Api\Data\OfferInterface;
 
 /**
  * Offer Plugin class on \Smile\Offer\Api\Data\OfferInterface
- *
- * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class OfferPlugin
 {
     /**
      * Set the offer as unavailable if it is out of stock.
-     *
-     * @param \Smile\Offer\Api\Data\OfferInterface $offer  The offer
-     * @param bool                              $result Result of the isAvailable() method of the offer
      */
     public function afterIsAvailable(OfferInterface $offer, bool $result): bool
     {
