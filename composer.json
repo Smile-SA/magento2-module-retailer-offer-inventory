@@ -17,7 +17,7 @@
     "smile/module-retailer-offer": "~2.0"
   },
   "require-dev": {
-    "smile/magento2-smilelab-quality-suite": "^1.0.5"
+    "smile/magento2-smilelab-quality-suite": "^3.0"
   },
   "license": "OSL-3.0",
   "authors": [

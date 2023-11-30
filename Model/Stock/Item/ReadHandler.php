@@ -35,7 +35,7 @@ class ReadHandler implements ExtensionInterface
      * Perform action on relation/extension attribute
      *
      * @param object $entity    Entity
-     * @param array                                       $arguments Arguments
+     * @param array  $arguments Arguments
      * @SuppressWarnings("PMD.UnusedFormalParameter")
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @throws \Exception
