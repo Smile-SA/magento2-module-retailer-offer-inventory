@@ -15,8 +15,6 @@ namespace Smile\RetailerOfferInventory\Api\Data;
 
 /**
  * Interface StockItemInterface
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 interface StockItemInterface
 {
@@ -57,32 +55,28 @@ interface StockItemInterface
     /**
      * Set field: item_id
      *
-     * @param int $value Item id.
      * @return StockItemInterface
      */
-    public function setItemId(int $value);
+    public function setItemId(int $value): StockItemInterface;
 
     /**
      * Set field: offer_id
      *
-     * @param int $value Offer id.
      * @return StockItemInterface
      */
-    public function setOfferId(int $value);
+    public function setOfferId(int $value): StockItemInterface;
 
     /**
      * Set field: qty
      *
-     * @param int $value Quantity.
      * @return StockItemInterface
      */
-    public function setQty(int $value);
+    public function setQty(int $value): StockItemInterface;
 
     /**
      * Set field: is_in_stock
      *
-     * @param int $value Is in stock.
      * @return StockItemInterface
      */
-    public function setIsInStock(int $value);
+    public function setIsInStock(int $value): StockItemInterface;
 }

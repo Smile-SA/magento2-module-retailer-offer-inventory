@@ -20,16 +20,11 @@ use Smile\RetailerOfferInventory\Model\Stock\ItemFactory;
 
 /**
  * Model SaveHandler class
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class SaveHandler implements ExtensionInterface
 {
     /**
      * ReadHandler constructor.
-     *
-     * @param \Smile\RetailerOfferInventory\Model\Stock\ItemFactory        $stockItemFactory  Stock item factory.
-     * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource Stock item resource.
      */
     public function __construct(
         private ItemFactory $stockItemFactory,

@@ -18,31 +18,21 @@ use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Smile\Offer\Api\Data\OfferInterface;
 use Smile\RetailerOffer\Helper\Offer;
-use Smile\RetailerOffer\Helper\Settings;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Generic Helper for Retailer OfferInventory
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class OfferInventory extends AbstractHelper
 {
     /**
      * ProductPlugin constructor.
-     *
-     * @param \Magento\Framework\App\Helper\Context             $context        Helper context.
-     * @param \Smile\RetailerOffer\Helper\Settings              $settingsHelper Settings Helper
-     * @param \Smile\RetailerOffer\Helper\Offer                 $offerHelper    Offer Helper
-     * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory $productFactory Product Factory
      */
     public function __construct(
         Context $context,
-        private Settings $settingsHelper,
         private Offer $offerHelper,
         private ProductInterfaceFactory $productFactory
     ) {
-
         parent::__construct($context);
     }
 
@@ -72,6 +62,8 @@ class OfferInventory extends AbstractHelper
         $offerStock = null;
 
         $offer = $this->getOffer($productId, $retailerId);
+        //An undefined method
+        // @phpstan-ignore-next-line
         if ($offer->getId() && $offer->getExtensionAttributes()->getStockItem()) {
             $offerStock = $offer->getExtensionAttributes()->getStockItem();
         }

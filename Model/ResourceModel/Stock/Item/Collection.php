@@ -18,8 +18,6 @@ use Smile\RetailerOfferInventory\Model\Stock\Item;
 
 /**
  * ResourceModel Collection class
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class Collection extends AbstractCollection
 {

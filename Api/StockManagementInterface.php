@@ -17,8 +17,6 @@ use Magento\Sales\Model\Order\Item;
 
 /**
  * Interface StockManagementInterface
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 interface StockManagementInterface
 {
@@ -26,8 +24,8 @@ interface StockManagementInterface
      * Get back to stock (when order is canceled or whatever else)
      *
      * @param Item $stockItem Stock item object.
-     * @param float                           $qty       Quantity.
+     * @param float $qty Quantity.
      * @return bool
      */
-    public function backItemQty(Item $stockItem, float $qty);
+    public function backItemQty(Item $stockItem, float $qty): bool;
 }

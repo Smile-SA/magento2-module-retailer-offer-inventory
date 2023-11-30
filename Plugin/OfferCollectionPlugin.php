@@ -23,15 +23,11 @@ use Smile\Offer\Model\ResourceModel\Offer\Collection;
 /**
  * Offer Collection Plugin.
  * Used to compute inventory data with a join.
- *
- * @author   Romain Ruaud <romain.ruaud@smile.fr>
  */
 class OfferCollectionPlugin
 {
     /**
      * Constructor.
-     *
-     * @param JoinProcessorInterface $joinProcessor Extension Attribute Join Processor
      */
     public function __construct(private JoinProcessorInterface $joinProcessor)
     {
@@ -42,10 +38,6 @@ class OfferCollectionPlugin
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      * @SuppressWarnings(PHPMD.StaticAccess)
-     * @param Collection $collection Collection loaded.
-     * @param \Closure                                          $proceed    Original method.
-     * @param bool                                              $printQuery Print queries used to load the collection.
-     * @param bool                                              $logQuery   Log queries used to load the collection.
      */
     public function aroundLoad(
         Collection $collection,
