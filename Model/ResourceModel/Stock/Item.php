@@ -1,70 +1,50 @@
 <?php
+
 /**
  * ResourceModel Stock Item
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model\ResourceModel\Stock;
 
-use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Select;
 use Magento\Framework\EntityManager\EntityManager;
 use Magento\Framework\EntityManager\MetadataPool;
-use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Context;
 use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
- * Class Item
- *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
- * @author   Fanny DECLERCK <fadec@smile.fr>
+ * Item resource model class
  */
 class Item extends AbstractDb
 {
     /**
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * @var MetadataPool
-     */
-    protected $metadataPool;
-
-    /**
      * Class constructor
-     *
-     * @param Context       $context        Context
-     * @param EntityManager $entityManager  Entity Manager
-     * @param MetadataPool  $metadataPool   Metadata pool
-     * @param string        $connectionName Connection name
      */
     public function __construct(
         Context       $context,
-        EntityManager $entityManager,
-        MetadataPool  $metadataPool,
-        $connectionName = null
+        protected EntityManager $entityManager,
+        protected MetadataPool  $metadataPool,
+        ?string $connectionName = null
     ) {
         parent::__construct($context, $connectionName);
-
-        $this->entityManager = $entityManager;
-        $this->metadataPool  = $metadataPool;
     }
 
     /**
      * Get connection
      *
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface|false
      * @throws \Exception
      */
-    public function getConnection()
+    public function getConnection(): AdapterInterface|false
     {
         return $this->metadataPool->getMetadata(StockItemInterface::class)->getEntityConnection();
     }
@@ -75,11 +55,11 @@ class Item extends AbstractDb
      * @param AbstractModel $object Object
      * @param mixed         $value  Value
      * @param string        $field  Field
-     *
      * @return $this
      * @throws \Exception
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
-    public function load(AbstractModel $object, $value, $field = null)
+    public function load(AbstractModel $object, $value, $field = null): self
     {
         $objectId = $this->getObjectId($value, $field);
 
@@ -93,12 +73,9 @@ class Item extends AbstractDb
     /**
      * Save an object
      *
-     * @param AbstractModel $object Object
-     *
-     * @return $this
      * @throws \Exception
      */
-    public function save(AbstractModel $object)
+    public function save(AbstractModel $object): self
     {
         $this->entityManager->save($object);
 
@@ -108,12 +85,9 @@ class Item extends AbstractDb
     /**
      * Delete an object
      *
-     * @param AbstractModel $object Object
-     *
-     * @return $this
      * @throws \Exception
      */
-    public function delete(AbstractModel $object)
+    public function delete(AbstractModel $object): self
     {
         $this->entityManager->delete($object);
 
@@ -123,14 +97,10 @@ class Item extends AbstractDb
     /**
      * Insert or update lines
      *
-     * @param array $values Values
-     * @param array $fields Fields
-     *
-     * @return $this
      * @throws \Exception
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function insertOnDuplicate($values, $fields)
+    public function insertOnDuplicate(array $values, array $fields): self
     {
         $this->getConnection()->insertOnDuplicate(
             $this->getMainTable(),
@@ -144,13 +114,9 @@ class Item extends AbstractDb
     /**
      * Get the id of an object with all table field
      *
-     * @param mixed $value Value
-     * @param null  $field Field
-     *
-     * @return bool|int|string
      * @throws \Exception
      */
-    protected function getObjectId($value, $field = null)
+    protected function getObjectId(mixed $value, ?string $field = null): bool|int|string
     {
         $entityMetadata = $this->metadataPool->getMetadata(StockItemInterface::class);
         if ($field === null) {
@@ -177,7 +143,7 @@ class Item extends AbstractDb
      *
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(
             StockItemInterface::TABLE_NAME,

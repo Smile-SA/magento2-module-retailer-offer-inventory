@@ -1,6 +1,7 @@
 {
   "name": "smile/module-retailer-offer-inventory",
   "type": "magento2-module",
+  "version": "1.2.0",
   "description": "Smile Retailer Offer Inventory",
   "keywords": ["magento2", "retailer offer", "offer inventory", "retailer offer inventory"],
   "repositories": [
@@ -13,10 +14,10 @@
     "magento/framework": "*",
     "magento/module-store": "*",
     "magento/module-checkout": "*",
-    "smile/module-retailer-offer": "~1.7.0"
+    "smile/module-retailer-offer": "~2.0"
   },
   "require-dev": {
-    "smile/magento2-smilelab-quality-suite": "^1.0.5"
+    "smile/magento2-smilelab-quality-suite": "^3.0"
   },
   "license": "OSL-3.0",
   "authors": [

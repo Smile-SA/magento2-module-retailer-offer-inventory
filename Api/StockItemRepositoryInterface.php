@@ -1,22 +1,22 @@
 <?php
+
 /**
  * Api
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Api;
+
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 /**
  * Interface StockItemRepositoryInterface
- *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 interface StockItemRepositoryInterface
 {
@@ -27,7 +27,7 @@ interface StockItemRepositoryInterface
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getById($itemId);
+    public function getById(int $itemId): Data\StockItemInterface;
 
     /**
      * Retrieve stock item inventory by offer_id.
@@ -36,7 +36,7 @@ interface StockItemRepositoryInterface
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getByOfferId($offerId);
+    public function getByOfferId(int $offerId): Data\StockItemInterface;
 
     /**
      * Retrieve stock item inventory matching the specified criteria.
@@ -45,7 +45,7 @@ interface StockItemRepositoryInterface
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemResultsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria): Data\StockItemResultsInterface;
 
     /**
      * Save stock.
@@ -54,7 +54,7 @@ interface StockItemRepositoryInterface
      * @return \Smile\RetailerOfferInventory\Api\Data\StockItemInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(Data\StockItemInterface $stockItem);
+    public function save(Data\StockItemInterface $stockItem): Data\StockItemInterface;
 
     /**
      * Delete stock by ID.
@@ -64,7 +64,7 @@ interface StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function deleteById($itemId);
+    public function deleteById(int $itemId): bool;
 
     /**
      * Delete stock by Offer ID.
@@ -74,7 +74,7 @@ interface StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function deleteByOfferId($offerId);
+    public function deleteByOfferId(int $offerId): bool;
 
     /**
      * Delete stock.
@@ -84,5 +84,5 @@ interface StockItemRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
-    public function delete(Data\StockItemInterface $stockItem);
+    public function delete(Data\StockItemInterface $stockItem): bool;
 }

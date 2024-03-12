@@ -1,24 +1,23 @@
 <?php
+
 /**
  * ResourceModel Stock Item
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Smile\RetailerOfferInventory\Model\Stock\Item;
 
 /**
- * Class Collection
- *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
- * @author   Fanny DECLERCK <fadec@smile.fr>
+ * ResourceModel Collection class
  */
 class Collection extends AbstractCollection
 {
@@ -27,10 +26,10 @@ class Collection extends AbstractCollection
      *
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(
-            \Smile\RetailerOfferInventory\Model\Stock\Item::class,
+            Item::class,
             \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item::class
         );
     }

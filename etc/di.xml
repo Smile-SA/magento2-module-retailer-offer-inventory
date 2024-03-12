@@ -83,11 +83,6 @@
         </arguments>
     </type>
 
-    <!-- Add data into UI Component -->
-    <type name="Smile\RetailerOffer\Ui\Component\Offer\Form\DataProvider">
-        <plugin name="smile_retailer_offer_inventory_add_data" type="Smile\RetailerOfferInventory\Plugin\OfferEditFormPlugin" />
-    </type>
-
     <!-- Join offer inventory on collection -->
     <type name="Smile\Offer\Model\ResourceModel\Offer\Collection">
         <plugin name="add_inventory_field_to_offer_collection" type="Smile\RetailerOfferInventory\Plugin\OfferCollectionPlugin" />
@@ -101,5 +96,12 @@
     <!-- Back Item Qty to offer when canceling an order -->
     <type name="\Magento\CatalogInventory\Observer\CancelOrderItemObserver">
         <plugin name="back_item_qty_on_order_cancel" type="Smile\RetailerOfferInventory\Plugin\CancelOrderItemObserverPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\ResourceModel\QtyCounterInterface">
+        <plugin name="update_source_item_at_legacy_qty_counter" disabled="true"/>
+    </type>
+    <type name="Magento\CatalogInventory\Api\RegisterProductSaleInterface">
+        <plugin name="process_register_products_sale" disabled="true"/>
     </type>
 </config>

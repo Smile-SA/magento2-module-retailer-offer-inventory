@@ -1,64 +1,52 @@
 <?php
+
 /**
  * Model Stock Item Handler
  *
  * @category  Smile
- * @package   Smile\RetailerOfferInventory
  * @author    Fanny DECLERCK <fadec@smile.fr>
  * @copyright 2018 Smile
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+declare(strict_types=1);
+
 namespace Smile\RetailerOfferInventory\Model\Stock\Item;
 
+use Magento\Framework\EntityManager\Operation\ExtensionInterface;
+use Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item;
+use Smile\RetailerOfferInventory\Model\Stock\ItemFactory;
+
 /**
- * Class ReadHandler
- *
- * @category Smile
- * @package  Smile\RetailerOfferInventory
- * @author   Fanny DECLERCK <fadec@smile.fr>
+ * ReadHandler model class
  */
-class ReadHandler implements \Magento\Framework\EntityManager\Operation\ExtensionInterface
+class ReadHandler implements ExtensionInterface
 {
     /**
-     * @var \Smile\RetailerOfferInventory\Model\Stock\ItemFactory
-     */
-    private $stockItemFactory;
-
-    /**
-     * @var \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item
-     */
-    private $stockItemResource;
-
-    /**
      * ReadHandler constructor.
-     *
-     * @param \Smile\RetailerOfferInventory\Model\Stock\ItemFactory        $stockItemFactory  Stock item factory.
-     * @param \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource Stock item resource.
      */
     public function __construct(
-        \Smile\RetailerOfferInventory\Model\Stock\ItemFactory $stockItemFactory,
-        \Smile\RetailerOfferInventory\Model\ResourceModel\Stock\Item $stockItemResource
+        private ItemFactory $stockItemFactory,
+        private Item $stockItemResource
     ) {
-        $this->stockItemFactory  = $stockItemFactory;
-        $this->stockItemResource = $stockItemResource;
     }
 
     /**
      * Perform action on relation/extension attribute
      *
-     * @param \Smile\Offer\Api\Data\OfferInterface|object $entity    Entity
-     * @param array                                       $arguments Arguments
-     *
-     * @return object|bool
+     * @param object $entity    Entity
+     * @param array  $arguments Arguments
      * @SuppressWarnings("PMD.UnusedFormalParameter")
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @throws \Exception
      */
-    public function execute($entity, $arguments = [])
+    public function execute($entity, $arguments = []): object|bool
     {
         $stockItem = $this->stockItemFactory->create();
         $this->stockItemResource->load($stockItem, $entity->getId(), 'offer_id');
+        $stockItemData = $stockItem->getData();
         $entity->getExtensionAttributes()->setStockItem($stockItem);
+        $entity['inventory'] = $stockItemData;
 
         return $entity;
     }

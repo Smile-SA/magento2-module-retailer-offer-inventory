@@ -1,0 +1,15 @@
+{
+    "smile_offer_inventory_stock_item": {
+        "column": {
+            "item_id": true,
+            "offer_id": true,
+            "qty": true,
+            "is_in_stock": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "SMILE_OFFER_INVENTORY_STOCK_ITEM_OFFER_ID_SMILE_OFFER_OFFER_ID": true,
+            "SMILE_OFFER_INVENTORY_STOCK_ITEM_OFFER_ID": true
+        }
+    }
+}
