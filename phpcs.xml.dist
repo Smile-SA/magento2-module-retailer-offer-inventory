@@ -17,6 +17,7 @@
     <rule ref="SmileLab">
         <!-- Ignored rules due to legacy code -->
         <exclude name="Magento2.Exceptions.DirectThrow.FoundDirectThrow"/>
+        <exclude name="Magento2.Legacy.InstallUpgrade.ObsoleteInstallSchemaScript"/>
     </rule>
 
     <file>.</file>

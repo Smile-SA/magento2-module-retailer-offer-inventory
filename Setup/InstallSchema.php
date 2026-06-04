@@ -23,8 +23,6 @@ use Smile\RetailerOfferInventory\Api\Data\StockItemInterface;
 
 /**
  * Offer Inventory schema install class.
- *
- * @author   Fanny DECLERCK <fadec@smile.fr>
  */
 class InstallSchema implements InstallSchemaInterface
 {
