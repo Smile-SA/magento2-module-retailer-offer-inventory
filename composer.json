@@ -1,39 +1,48 @@
 {
-  "name": "smile/module-retailer-offer-inventory",
-  "type": "magento2-module",
-  "version": "1.2.0",
-  "description": "Smile Retailer Offer Inventory",
-  "keywords": ["magento2", "retailer offer", "offer inventory", "retailer offer inventory"],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://repo.magento.com/"
-    }
-  ],
-  "require": {
-    "magento/framework": "*",
-    "magento/module-store": "*",
-    "magento/module-checkout": "*",
-    "smile/module-retailer-offer": "~2.0"
-  },
-  "require-dev": {
-    "smile/magento2-smilelab-quality-suite": "^3.0"
-  },
-  "license": "OSL-3.0",
-  "authors": [
-    {
-      "name": "Fanny DECLERCK",
-      "email": "fadec@smile.fr"
-    }
-  ],
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "smile/module-retailer-offer-inventory",
+    "type": "magento2-module",
+    "description": "Smile Retailer Offer Inventory",
+    "keywords": ["magento2", "retailer offer", "offer inventory", "retailer offer inventory"],
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Fanny DECLERCK",
+            "email": "fadec@smile.fr"
+        }
     ],
-    "psr-4": {
-      "Smile\\RetailerOfferInventory\\" : ""
+    "require": {
+        "magento/framework": "*",
+        "magento/module-store": "*",
+        "magento/module-checkout": "*",
+        "smile/module-retailer-offer": "~2.0"
+    },
+    "require-dev": {
+        "smile/magento2-smilelab-quality-suite": "^3.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Smile\\RetailerOfferInventory\\" : ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "magento/composer-dependency-version-audit-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "audit": {
+            "abandoned": "report"
+        },
+        "sort-packages": true
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
 }
