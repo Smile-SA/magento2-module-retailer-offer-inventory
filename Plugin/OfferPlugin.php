@@ -26,7 +26,9 @@ class OfferPlugin
      */
     public function afterIsAvailable(OfferInterface $offer, bool $result): bool
     {
+        // @phpstan-ignore-next-line
         if (true === $result && $offer->getExtensionAttributes() && $offer->getExtensionAttributes()->getStockItem()) {
+            // @phpstan-ignore-next-line
             $result = (bool) $offer->getExtensionAttributes()->getStockItem()->getIsInStock();
         }
 
