@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "magento/framework": "*",
+        "php": "^8.3",
+        "magento/framework": ">=103.0.7",
         "magento/module-store": "*",
         "magento/module-checkout": "*",
         "smile/module-retailer-offer": "~2.0"
