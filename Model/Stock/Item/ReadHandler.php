@@ -40,7 +40,7 @@ class ReadHandler implements ExtensionInterface
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @throws \Exception
      */
-    public function execute($entity, $arguments = []): object|bool
+    public function execute($entity, $arguments = [])
     {
         $stockItem = $this->stockItemFactory->create();
         $this->stockItemResource->load($stockItem, $entity->getId(), 'offer_id');
