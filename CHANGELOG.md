@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - Require the Smile modules of the same line: `smile/module-retailer-offer ~2.0.5`
 - CI: static analysis on Magento 2.4.5, `setup:di:compile` on Magento 2.4.4 and 2.4.5
 
-## [2.0.0] - 2024-03-12
-[2.0.0]: https://github.com/Smile-SA/magento2-module-retailer-offer-inventory/compare/1.1.0...2.0.0
+## [1.2.0] - 2024-03-12
+[1.2.0]: https://github.com/Smile-SA/magento2-module-retailer-offer-inventory/compare/1.1.0...1.2.0
 
 Magento 2.4.6 and PHP 8.2 compatibility
