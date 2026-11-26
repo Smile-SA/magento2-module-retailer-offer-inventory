@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 - Magento 2.4.4 and 2.4.5 are supported by the 1.2.x line, from 1.2.1
 - CI: static analysis and `setup:di:compile` run on Mage-OS, without Magento credentials
 
-## [2.0.0] - 2024-03-12
-[2.0.0]: https://github.com/Smile-SA/magento2-module-retailer-offer-inventory/compare/1.1.0...2.0.0
+## [1.2.0] - 2024-03-12
+[1.2.0]: https://github.com/Smile-SA/magento2-module-retailer-offer-inventory/compare/1.1.0...1.2.0
 
 Magento 2.4.6 and PHP 8.2 compatibility
