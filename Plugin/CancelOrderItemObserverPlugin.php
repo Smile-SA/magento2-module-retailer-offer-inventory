@@ -18,7 +18,6 @@ namespace Smile\RetailerOfferInventory\Plugin;
 use Closure;
 use Magento\CatalogInventory\Observer\CancelOrderItemObserver;
 use Magento\Framework\Event\Observer;
-use Smile\RetailerOfferInventory\Api\StockManagementInterface;
 
 /**
  * Plugin on \Magento\CatalogInventory\Observer\CancelOrderItemObserver
@@ -26,15 +25,7 @@ use Smile\RetailerOfferInventory\Api\StockManagementInterface;
 class CancelOrderItemObserverPlugin
 {
     /**
-     * CancelOrderItemObserverPlugin constructor.
-     */
-    public function __construct(
-        protected StockManagementInterface $stockManagement
-    ) {
-    }
-
-    /**
-     * Back item qty to offer inventory if needed.
+     * Do not give the qty back to the global inventory.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -44,13 +35,6 @@ class CancelOrderItemObserverPlugin
         Observer $observer
     ): void {
         // Intentional omission of parent $proceed : we do not want to change global inventory.
-        /** @var \Magento\Sales\Model\Order\Item $item */
-        $item     = $observer->getEvent()->getItem();
-        $children = $item->getChildrenItems();
-        $qty      = $item->getQtyOrdered() - max($item->getQtyShipped(), $item->getQtyInvoiced()) - $item
-                                                                                                     ->getQtyCanceled();
-        if ($item->getId() && $item->getProductId() && empty($children) && $qty) {
-            $this->stockManagement->backItemQty($item, $qty);
-        }
+        // The offer inventory is given back by \Smile\RetailerOfferInventory\Observer\BackItemQtyOnOrderCancel.
     }
 }
