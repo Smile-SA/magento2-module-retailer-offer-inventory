@@ -37,7 +37,7 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
      */
     public function getItemId(): int
     {
-        return $this->getId();
+        return (int) $this->getId();
     }
 
     /**
