@@ -39,7 +39,7 @@ class StockStateProviderPlugin
     public function beforeCheckQty(
         StockStateProvider $stockState,
         StockItemInterface $stockItem,
-        int|float $qty
+        $qty
     ): array {
         if ($this->settingsHelper->useStoreOffers()) {
             if ($stockItem->getQty() - $qty < 0) {

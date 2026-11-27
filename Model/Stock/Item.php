@@ -25,9 +25,7 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
     public const CACHE_TAG = 'retailer_offer_inventory_stock_item';
 
     /**
-     * Get identities
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getIdentities(): array
     {
@@ -39,7 +37,7 @@ class Item extends AbstractModel implements StockItemInterface, IdentityInterfac
      */
     public function getItemId(): int
     {
-        return $this->getId();
+        return (int) $this->getId();
     }
 
     /**

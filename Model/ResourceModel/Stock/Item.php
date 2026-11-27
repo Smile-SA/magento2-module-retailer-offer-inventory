@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Smile\RetailerOfferInventory\Model\ResourceModel\Stock;
 
-use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Select;
 use Magento\Framework\EntityManager\EntityManager;
 use Magento\Framework\EntityManager\MetadataPool;
@@ -44,7 +43,7 @@ class Item extends AbstractDb
      *
      * @throws \Exception
      */
-    public function getConnection(): AdapterInterface|false
+    public function getConnection()
     {
         return $this->metadataPool->getMetadata(StockItemInterface::class)->getEntityConnection();
     }
@@ -116,7 +115,7 @@ class Item extends AbstractDb
      *
      * @throws \Exception
      */
-    protected function getObjectId(mixed $value, ?string $field = null): bool|int|string
+    protected function getObjectId($value, ?string $field = null)
     {
         $entityMetadata = $this->metadataPool->getMetadata(StockItemInterface::class);
         if ($field === null) {

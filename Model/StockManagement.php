@@ -36,13 +36,15 @@ class StockManagement implements StockManagementInterface
      */
     public function backItemQty(Item $orderItem, float $qty): bool
     {
-        $sellerId = $orderItem->getOrder()->getSellerId();
+        $sellerId = (int) $orderItem->getOrder()->getSellerId();
         if ($sellerId) {
             $product = $orderItem->getProduct();
-            $offer   = $this->offerHelper->getOffer($product, $sellerId);
+            $offer = $this->offerHelper->getOffer($product, $sellerId);
 
-            if ($offer->getExtensionAttributes()->getStockItem() !== null) {
-                $stockItem = $offer->getExtensionAttributes()->getStockItem();
+            // @phpstan-ignore-next-line
+            $stockItem = $offer->getExtensionAttributes()->getStockItem();
+
+            if ($stockItem !== null) {
                 $stockItem->setQty((int) ($stockItem->getQty() + $qty));
 
                 if ($stockItem->getQty() > 0) {

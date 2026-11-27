@@ -37,7 +37,7 @@ class StockItemPlugin
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) We do not need to call the parent method.
      * @throws \Exception
      */
-    public function afterSetIsInStock(Item $item, bool|Item $result): Item
+    public function afterSetIsInStock(Item $item, $result): Item
     {
         if ($this->settingsHelper->useStoreOffers()) {
             $offerStock = $this->offerInventoryHelper->getCurrentOfferStock($item->getProductId());

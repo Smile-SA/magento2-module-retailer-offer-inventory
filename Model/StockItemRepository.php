@@ -122,7 +122,7 @@ class StockItemRepository implements StockItemRepositoryInterface
     public function save(Data\StockItemInterface $stockItem): StockItemInterface
     {
         try {
-            /** @var \Magento\Framework\Model\AbstractModel $stockItem */
+            /** @var StockItemInterface&\Magento\Framework\Model\AbstractModel $stockItem */
             $this->objectResource->save($stockItem);
         } catch (Exception $e) {
             $msg = new Phrase($e->getMessage());
@@ -168,7 +168,7 @@ class StockItemRepository implements StockItemRepositoryInterface
     public function delete(Data\StockItemInterface $stockItem): bool
     {
         try {
-            /** @var \Magento\Framework\Model\AbstractModel $stockItem */
+            /** @var StockItemInterface&\Magento\Framework\Model\AbstractModel $stockItem */
             $this->objectResource->delete($stockItem);
         } catch (Exception $e) {
             $msg = new Phrase($e->getMessage());

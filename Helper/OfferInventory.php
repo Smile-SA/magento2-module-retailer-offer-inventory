@@ -61,10 +61,12 @@ class OfferInventory extends AbstractHelper
     {
         $offerStock = null;
 
+        /** @var \Smile\Offer\Model\Offer $offer */
         $offer = $this->getOffer($productId, $retailerId);
-        //An undefined method
+
         // @phpstan-ignore-next-line
         if ($offer->getId() && $offer->getExtensionAttributes()->getStockItem()) {
+            // @phpstan-ignore-next-line
             $offerStock = $offer->getExtensionAttributes()->getStockItem();
         }
 
@@ -98,8 +100,7 @@ class OfferInventory extends AbstractHelper
     public function getCurrentOffer(int $productId): OfferInterface
     {
         $product = $this->productFactory->create()->setId($productId);
-        $offer   = $this->offerHelper->getCurrentOffer($product);
 
-        return $offer;
+        return $this->offerHelper->getCurrentOffer($product);
     }
 }

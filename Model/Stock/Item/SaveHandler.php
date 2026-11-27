@@ -41,7 +41,7 @@ class SaveHandler implements ExtensionInterface
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @throws \Exception
      */
-    public function execute($entity, $arguments = []): object|bool
+    public function execute($entity, $arguments = [])
     {
         $offerData = $entity->getInventory() ?? [];
 

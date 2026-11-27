@@ -44,7 +44,7 @@ class OfferCollectionPlugin
         Closure $proceed,
         bool $printQuery = false,
         bool $logQuery = false
-    ): \Smile\Retailer\Model\ResourceModel\Retailer\Collection|Collection {
+    ) {
         if (!$collection->isLoaded()) {
             Profiler::start('SmileRetailerOffer:INVENTORY_DATA');
 
